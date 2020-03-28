@@ -1,0 +1,5 @@
+spring:
+  profiles:
+    active: dev         # 指定当前活动环境配置名
+  application:
+    name: myapplication # 指定应用名称

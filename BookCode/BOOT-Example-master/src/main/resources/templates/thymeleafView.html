@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <h2 th:text="'姓名：' + ${name}"></h2>
+        <div>
+            <span>性别：</span>
+            <span th:if="${sex == 0}">女</span>
+            <span th:if="${sex == 1}">男</span>
+        </div>
+        <div>
+            <span>兴趣：</span>
+            <ol>
+                <li th:each="h:${hobbies}" th:text="${h}"></li>
+            </ol>
+        </div>
+    </body>
+</html>

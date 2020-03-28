@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" th:href="${#themes.code('theme.css')}" type="text/css"/>
+    </head>
+    <body>
+        <h2 th:text="'不同主题的视图!'"></h2>
+        <div>不同语言的内容为：</div>
+        <div th:text="${#themes.code('theme.language')}"></div>
+    </body>
+</html>
