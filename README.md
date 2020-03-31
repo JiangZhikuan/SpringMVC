@@ -1,2 +1,2 @@
-# SpringFramework
- 主要是SpringFramework学习demo
+# SpringMVC
+ 主要是SpringMVC学习demo，中间整合了MyBatis框架的学习
