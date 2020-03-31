@@ -12,7 +12,7 @@
     <script>
         window.onload=function () {
             const request = new XMLHttpRequest();
-            request.open("POST","/Spring_Maven_First/user/getUser",true);
+            request.open("POST","/user/getUser",true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send("id=1");
             request.onreadystatechange=function () {
