@@ -11,8 +11,8 @@
     <title>SpringMVC-Maven</title>
     <script>
         window.onload=function () {
-            const request = new XMLHttpRequest();
-            request.open("POST","/user/getUser",true);
+            var request = new XMLHttpRequest();
+            request.open("POST","/Spring-Maven-First/user/getUser",true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send("id=1");
             request.onreadystatechange=function () {
