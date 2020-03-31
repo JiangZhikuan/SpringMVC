@@ -15,7 +15,7 @@
     <context:annotation-config/>
 
     <!--配置扫描包-->
-    <context:component-scan base-package="simple"/>
+    <context:component-scan base-package="simple.controller"/>
 
     <!--配置注解驱动-->
     <mvc:annotation-driven/>
