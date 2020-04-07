@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 在此未说明属性为非必须的，那就表示属性必须设置 -->
+<!-- *****************最小配置文件结构介绍******************************* -->
+<!--
+    <configuration>
+        <appender></appender>    //存在1或多个，功能指定记录输出目的地
+        <root></root>            //最多存在一个，根logger
+        <logger><logger>        //存在1或多个，普通logger
+    </configuration>
+ -->
+<!-- *************************各个标签详细介绍********************************** -->
+
+<!-- debug（非必须）属性：true表示输出logback内部的日志信息（不影响配置和级别） ;
+     scan（非必须）属性：默认为false，true表示扫描配置文件的变化并自动重新配置，默认每隔1分钟扫描一次；
+     scanPeriod（非必须）属性：搭配scan属性使用，设置扫描的间隔时间
+-->
+<configuration debug="true"  scan="true" scanPeriod="1 seconds">
+
+    <!-- ************************常用的Appender************************************** -->
+    <!--
+        <appender>标签包含2个属性：name、class
+        name属性：指定appender名称;class属性：指定目的地类型 （比如ConsoleAppender、FileAppender等）
+        class属性的值决定了<appender>标签包含的子标签的种类。
+        -->
+    <!-- 该appender的功能是将记录信息以特定格式写到控制台 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!--encoder:将事件转换为字符串
+            默认配置为PatternLayoutEncoder类
+            encoder用于替代Layout，encoder扩展了Layout功能
+            Layout功能：只负责把事件转换为字符串，但是不能指定何时将记录写入到指定目的地
+            encoder功能：即负责把事件转换为字符串，也可以指定何时将记录写入到指定目的地
+         -->
+        <encoder>
+            <!-- 指定输出格式
+                %d{} :表示时间
+                %thread:请求记录所在的线程名
+                %-5level：用5位显示请求级别
+                %logger{36}：输出logger名，{36}表示logger名最大占用的字符位数，{0}表示最简短logger名（不包含包名）。
+             -->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0} -%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- level属性：指定根logger的分配级别 -->
+    <root level="debug">
+        <!-- ref属性：指定根logger关联的appender -->
+        <appender-ref ref="STDOUT"></appender-ref>
+    </root>
+</configuration>
