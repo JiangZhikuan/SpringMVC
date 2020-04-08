@@ -17,10 +17,12 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <spring.version>5.2.3.RELEASE</spring.version>
+    <mysql.version>5.1.47</mysql.version>
+    <druid.version>1.1.10</druid.version>
   </properties>
 
   <dependencies>
-
     <!--junit测试-->
     <dependency>
       <groupId>junit</groupId>
@@ -33,43 +35,43 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
-      <version>5.2.3.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>5.2.3.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-      <version>5.2.3.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
 
     <!--Spring Mvc核心依赖-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>5.2.3.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
 
     <!--springMVC数据库访问核心依赖-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
-      <version>5.2.3.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <!--事务管理-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
-      <version>5.2.3.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <!--spring测试-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
-      <version>5.2.3.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
 
     <!--servlet相关API，因为servlet容器中有此包，scope采用provided打包时不在打入此包-->
@@ -104,7 +106,7 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.47</version>
+      <version>${mysql.version}</version>
     </dependency>
 
     <!-- c3p0 -->
@@ -112,6 +114,13 @@
       <groupId>com.mchange</groupId>
       <artifactId>c3p0</artifactId>
       <version>0.9.5.2</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>${druid.version}</version>
     </dependency>
 
     <!--myBatis-->
@@ -126,6 +135,33 @@
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
       <version>2.0.1</version>
+    </dependency>
+
+    <!-- pagehelper 与MyBatis结合使用  分页 -->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>5.1.10</version>
+    </dependency>
+
+    <!-- swagger2 相关依赖-->
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>2.9.2</version>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>2.9.2</version>
+    </dependency>
+
+
+    <!-- kaptcha 验证码 -->
+    <dependency>
+      <groupId>com.github.penggle</groupId>
+      <artifactId>kaptcha</artifactId>
+      <version>2.3.2</version>
     </dependency>
 
   </dependencies>
