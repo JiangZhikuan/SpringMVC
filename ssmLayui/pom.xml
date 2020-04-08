@@ -156,6 +156,13 @@
       <version>2.9.2</version>
     </dependency>
 
+    <!-- jstl -->
+    <dependency>
+      <groupId>javax.servlet.jsp.jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
 
     <!-- kaptcha 验证码 -->
     <dependency>
