@@ -4,12 +4,11 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          id="WebApp_ID" version="3.1">
-
-    <display-name>0328carrent</display-name>
+    <display-name>ssmOA</display-name>
 
     <!-- 编码过滤器开始 -->
     <filter>
-        <filter-name>EncodeingFilter</filter-name>
+        <filter-name>EncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
         <init-param>
             <param-name>encoding</param-name>
@@ -17,8 +16,8 @@
         </init-param>
     </filter>
     <filter-mapping>
-        <filter-name>EncodeingFilter</filter-name>
-        <servlet-name>springmvc</servlet-name>
+        <filter-name>EncodingFilter</filter-name>
+        <servlet-name>springMVC</servlet-name>
     </filter-mapping>
     <!-- 编码过滤器结束 -->
 
@@ -36,7 +35,7 @@
 
     <!-- 前端控制器开始 -->
     <servlet>
-        <servlet-name>springmvc</servlet-name>
+        <servlet-name>springMVC</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
@@ -45,7 +44,7 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>springmvc</servlet-name>
+        <servlet-name>springMVC</servlet-name>
         <url-pattern>*.action</url-pattern>
     </servlet-mapping>
 
