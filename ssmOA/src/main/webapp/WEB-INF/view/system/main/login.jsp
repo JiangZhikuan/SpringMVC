@@ -39,8 +39,8 @@
                            placeholder="请输入密码" autocomplete="off" class="layui-input admin-input" value="123456">
                 </div>
                 <div>
-                    <input type="text" name="captcha" placeholder="请输入验证码" autocomplete="off" class="layui-input admin-input admin-input-verify" value="xszg">
-                    <img class="admin-captcha" width="90" height="30" src="${ctx}/resources/images/captcha.jpg">
+                    <input type="text" name="identity" placeholder="请输入验证码" autocomplete="off" class="layui-input admin-input admin-input-verify" value="">
+                    <img class="admin-captcha" width="90" height="30" src="${ctx}/kaptcha" onclick="this.src='${ctx}/kaptcha'">
                 </div>
                 <button class="layui-btn admin-button" lay-submit lay-filter="login">登 陆</button>
                 <div style="text-align: center;color: red;">

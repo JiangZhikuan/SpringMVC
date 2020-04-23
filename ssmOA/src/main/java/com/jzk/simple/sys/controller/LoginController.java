@@ -38,6 +38,14 @@ public class LoginController {
     * */
     @RequestMapping("login")
     public String login(SysUserVo sysUserVo, Model model){
+        String kaptchaExpected = (String)WebUtils.getHttpSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+        String kaptchaReceived = sysUserVo.getIdentity();
+        if (kaptchaReceived == null || !kaptchaReceived.equalsIgnoreCase(kaptchaExpected))
+        {
+            model.addAttribute("error", SysConstast.VERIFICATION_CODE_MSG);
+            return "system/main/login";
+        }
+
         SysUser sysUser=this.sysUserService.login(sysUserVo);
         if(null!=sysUser){
             WebUtils.getHttpSession().setAttribute("user",sysUser);
