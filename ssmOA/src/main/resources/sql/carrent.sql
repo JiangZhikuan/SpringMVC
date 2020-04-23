@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 192.168.64.128
-Source Server Version : 50729
-Source Host           : 192.168.64.131:3306
+Source Server         : 200
+Source Server Version : 80011
+Source Host           : 192.168.1.200:3306
 Source Database       : carrent
 
 Target Server Type    : MYSQL
-Target Server Version : 50729
+Target Server Version : 80011
 File Encoding         : 65001
 
-Date: 2020-04-22 21:43:23
+Date: 2020-04-23 16:40:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -125,6 +125,52 @@ INSERT INTO `bus_rent` VALUES ('CZ_20181201_111936_383_31565', '1500.00', '2018-
 INSERT INTO `bus_rent` VALUES ('CZ_2018_0901_175000_97637709', '500.00', '2018-12-01 00:00:00', '2018-09-10 00:00:00', '1', '431321199291331131', '鄂A66666', '李四', '2018-12-01 00:00:00');
 INSERT INTO `bus_rent` VALUES ('CZ_20190611_094617_32192683', '500.00', '2019-06-11 09:46:17', '2019-06-15 09:46:19', '1', '43131334113331131', '鄂A66666', '超级管理员', '2019-06-11 09:46:25');
 INSERT INTO `bus_rent` VALUES ('CZ_20190727_152634_863_83662', '500.00', '2019-07-27 15:26:34', '2019-07-31 00:00:00', '1', '43131334113331131', '鄂A66666', '超级管理员', '2019-07-27 15:26:40');
+
+-- ----------------------------
+-- Table structure for system_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `system_menu`;
+CREATE TABLE `system_menu` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `pid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '父ID',
+  `title` varchar(100) NOT NULL DEFAULT '' COMMENT '名称',
+  `icon` varchar(100) NOT NULL DEFAULT '' COMMENT '菜单图标',
+  `href` varchar(100) NOT NULL DEFAULT '' COMMENT '链接',
+  `target` varchar(20) NOT NULL DEFAULT '_self' COMMENT '链接打开方式',
+  `sort` int(11) DEFAULT '0' COMMENT '菜单排序',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态(0:禁用,1:启用)',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注信息',
+  `create_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `update_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `delete_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
+  PRIMARY KEY (`id`),
+  KEY `title` (`title`),
+  KEY `href` (`href`)
+) ENGINE=InnoDB AUTO_INCREMENT=250 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='系统菜单表';
+
+-- ----------------------------
+-- Records of system_menu
+-- ----------------------------
+INSERT INTO `system_menu` VALUES ('1', '0', '汽车出租系统', '&#xe68e;', '', '', '0', '1', '', null, null, null);
+INSERT INTO `system_menu` VALUES ('2', '1', '基础管理', '&#xe653;', '', '', '0', '1', '', null, null, null);
+INSERT INTO `system_menu` VALUES ('3', '1', '业务管理', '&#xe663;', '', '', '0', '1', '', null, null, null);
+INSERT INTO `system_menu` VALUES ('4', '1', '系统管理', '&#xe716;', '', '', '0', '1', null, null, null, null);
+INSERT INTO `system_menu` VALUES ('5', '1', '统计分析', '&#xe629;', '', '', '0', '1', null, null, null, null);
+INSERT INTO `system_menu` VALUES ('6', '2', '客户管理', '&#xe770;', '../bus/toCustomerManager.action', '', '0', '1', null, null, null, null);
+INSERT INTO `system_menu` VALUES ('7', '2', '车辆管理', '&#xe657;', '../bus/toCarManager.action', '', '0', '1', null, null, null, null);
+INSERT INTO `system_menu` VALUES ('8', '3', '汽车出租', '&#xe65b;', '../bus/toRentCarManager.action', '', '0', '1', null, null, null, null);
+INSERT INTO `system_menu` VALUES ('9', '3', '出租单管理', '&#xe6b2;', '../bus/toRentManager.action', '', '0', '1', null, null, null, null);
+INSERT INTO `system_menu` VALUES ('10', '3', '汽车入库', '&#xe65a;', '../bus/toCheckCarManager.action', '', '0', '1', null, null, null, null);
+INSERT INTO `system_menu` VALUES ('11', '3', '检查单管理', '&#xe705;', '../bus/toCheckManager.action', '', '0', '1', null, null, null, null);
+INSERT INTO `system_menu` VALUES ('12', '4', '菜单管理', '&#xe60f;', '../sys/toMenuManager.action', '', '0', '1', null, null, null, null);
+INSERT INTO `system_menu` VALUES ('13', '4', '角色管理', '&#xe66f;', '../sys/toRoleManager.action', '', '0', '1', null, null, null, null);
+INSERT INTO `system_menu` VALUES ('14', '4', '用户管理', '&#xe770;', '../sys/toUserManager.action', '', '0', '1', null, null, null, null);
+INSERT INTO `system_menu` VALUES ('15', '4', '日志管理', '&#xe655;', '../sys/toLogInfoManager.action', '', '0', '1', null, null, null, null);
+INSERT INTO `system_menu` VALUES ('16', '4', '公告管理', '&#xe645;', '../sys/toNewsManager.action', '', '0', '1', null, null, null, null);
+INSERT INTO `system_menu` VALUES ('17', '4', '数据源监控', '&#xe857;', '../druid/', '', '0', '1', null, null, null, null);
+INSERT INTO `system_menu` VALUES ('18', '5', '客户地区统计', '&#xe63c;', '../stat/toCustomerAreaStat.action', '', '0', '1', null, null, null, null);
+INSERT INTO `system_menu` VALUES ('19', '5', '公司年度月份销售额', '&#xe62c;', '../stat/toCompanyYearGradeStat.action', '', '0', '1', null, null, null, null);
+INSERT INTO `system_menu` VALUES ('20', '5', '业务员年度销售额', '&#xe62d;', '../stat/toOpernameYearGradeStat.action', '', '0', '1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for sys_log_login
@@ -333,18 +379,18 @@ CREATE TABLE `sys_menu` (
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES ('1', '0', '汽车出租系统', null, '1', null, '&#xe68e;', '1');
+INSERT INTO `sys_menu` VALUES ('1', '0', '汽车出租系统', '', '1', '', '&#xe68e;', '1');
 INSERT INTO `sys_menu` VALUES ('2', '1', '基础管理', '', '1', '', '&#xe653;', '1');
 INSERT INTO `sys_menu` VALUES ('3', '1', '业务管理', '', '1', '', '&#xe663;', '1');
 INSERT INTO `sys_menu` VALUES ('4', '1', '系统管理', '', '0', '', '&#xe716;', '1');
-INSERT INTO `sys_menu` VALUES ('5', '1', '统计分析', null, '0', null, '&#xe629;', '1');
+INSERT INTO `sys_menu` VALUES ('5', '1', '统计分析', '', '0', '', '&#xe629;', '1');
 INSERT INTO `sys_menu` VALUES ('6', '2', '客户管理', '../bus/toCustomerManager.action', '0', '', '&#xe770;', '1');
 INSERT INTO `sys_menu` VALUES ('7', '2', '车辆管理', '../bus/toCarManager.action', '0', '', '&#xe657;', '1');
 INSERT INTO `sys_menu` VALUES ('8', '3', '汽车出租', '../bus/toRentCarManager.action', '0', '', '&#xe65b;', '1');
 INSERT INTO `sys_menu` VALUES ('9', '3', '出租单管理', '../bus/toRentManager.action', '0', '', '&#xe6b2;', '1');
 INSERT INTO `sys_menu` VALUES ('10', '3', '汽车入库', '../bus/toCheckCarManager.action', '0', '', '&#xe65a;', '1');
 INSERT INTO `sys_menu` VALUES ('11', '3', '检查单管理', '../bus/toCheckManager.action', '0', '', '&#xe705;', '1');
-INSERT INTO `sys_menu` VALUES ('12', '4', '菜单管理', '../sys/toMenuManager.action', '0', null, '&#xe60f;', '1');
+INSERT INTO `sys_menu` VALUES ('12', '4', '菜单管理', '../sys/toMenuManager.action', '0', '', '&#xe60f;', '1');
 INSERT INTO `sys_menu` VALUES ('13', '4', '角色管理', '../sys/toRoleManager.action', '0', '', '&#xe66f;', '1');
 INSERT INTO `sys_menu` VALUES ('14', '4', '用户管理', '../sys/toUserManager.action', '0', '', '&#xe770;', '1');
 INSERT INTO `sys_menu` VALUES ('15', '4', '日志管理', '../sys/toLogInfoManager.action', '0', '', '&#xe655;', '1');
@@ -500,29 +546,3 @@ INSERT INTO `sys_user` VALUES ('4', 'ls', '43311341311314341', '李四', '1', '�
 INSERT INTO `sys_user` VALUES ('5', 'ww', '4313133131331312', '王五', '1', '武汉', '13413131131', 'e10adc3949ba59abbe56e057f20f883e', '领导', '2', '1');
 INSERT INTO `sys_user` VALUES ('6', 'xm', '45113141331131131', '小明', '0', '武昌', '13451333131', 'e10adc3949ba59abbe56e057f20f883e', '扫地地', '2', '1');
 INSERT INTO `sys_user` VALUES ('7', 'xdd', '41113113331133', '习大大', '1', '北京', '13511333113', 'e10adc3949ba59abbe56e057f20f883e', '主席', '2', '1');
-
--- ----------------------------
--- Table structure for system_menu
--- ----------------------------
-DROP TABLE IF EXISTS `system_menu`;
-CREATE TABLE `system_menu` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `pid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '父ID',
-  `title` varchar(100) NOT NULL DEFAULT '' COMMENT '名称',
-  `icon` varchar(100) NOT NULL DEFAULT '' COMMENT '菜单图标',
-  `href` varchar(100) NOT NULL DEFAULT '' COMMENT '链接',
-  `target` varchar(20) NOT NULL DEFAULT '_self' COMMENT '链接打开方式',
-  `sort` int(11) DEFAULT '0' COMMENT '菜单排序',
-  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态(0:禁用,1:启用)',
-  `remark` varchar(255) DEFAULT NULL COMMENT '备注信息',
-  `create_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `update_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
-  `delete_at` timestamp NULL DEFAULT NULL COMMENT '删除时间',
-  PRIMARY KEY (`id`),
-  KEY `title` (`title`),
-  KEY `href` (`href`)
-) ENGINE=InnoDB AUTO_INCREMENT=250 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='系统菜单表';
-
--- ----------------------------
--- Records of system_menu
--- ----------------------------
