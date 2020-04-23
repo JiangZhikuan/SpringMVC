@@ -26,6 +26,9 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    <listener>
+        <listener-class>com.jzk.simple.sys.listener.AppListener</listener-class>
+    </listener>
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:applicationContext.xml</param-value>
@@ -51,7 +54,6 @@
     <!-- 前端控制器结束 -->
 
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

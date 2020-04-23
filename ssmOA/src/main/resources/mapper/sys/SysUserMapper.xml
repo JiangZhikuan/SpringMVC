@@ -308,6 +308,6 @@
     select 
     <include refid="Base_Column_List"/>
     from sys_user
-    where loginname=#{loginname,jdbcType=VARCHAR} and #{pwd,jdbcType=VARCHAR}
+    where loginname=#{loginname,jdbcType=VARCHAR} and pwd =  #{pwd,jdbcType=VARCHAR}
   </select>
 </mapper>
