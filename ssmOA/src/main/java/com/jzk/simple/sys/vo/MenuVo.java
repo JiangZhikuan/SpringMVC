@@ -1,10 +1,13 @@
 package com.jzk.simple.sys.vo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class MenuVo {
     private Integer id;
 
+    @JsonProperty("parentId")
     private Integer pid;
 
     private String title;
@@ -14,6 +17,8 @@ public class MenuVo {
     private String href;
 
     private String target;
+
+    private Boolean status;
 
     private List<MenuVo> child;
 
@@ -67,6 +72,14 @@ public class MenuVo {
 
     public List<MenuVo> getChild() {
         return child;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public void setChild(List<MenuVo> child) {

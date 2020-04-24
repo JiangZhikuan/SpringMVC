@@ -40,6 +40,7 @@ public class SysMenuServiceImpl implements SysMenuService {
             menuVo.setTitle(e.getTitle());
             menuVo.setIcon(e.getIcon());
             menuVo.setTarget(e.getTarget());
+            menuVo.setStatus(e.getStatus());
             menuInfo.add(menuVo);
         }
         map.put("menuInfo", TreeUtil.toTree(menuInfo,0));
