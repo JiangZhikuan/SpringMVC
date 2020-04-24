@@ -140,7 +140,7 @@
                 miniAdmin = layui.miniAdmin
 
             var options = {
-                iniUrl: "${ctx}/resources/api/init.json",    // 初始化接口
+                iniUrl: "${ctx}/login/menu.action",    // 初始化接口
                 clearUrl: "${ctx}/resources/api/clear.json", // 缓存清理接口
                 urlHashLocation: true,      // 是否打开hash定位
                 bgColorDefault: false,      // 主题默认配置

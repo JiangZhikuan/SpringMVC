@@ -45,9 +45,9 @@ layui.define(["jquery", "miniMenu", "element","miniTab", "miniTheme"], function 
                 if (data == null) {
                     miniAdmin.error('暂无菜单信息')
                 } else {
-                    miniAdmin.renderLogo(data.logoInfo);
+                    miniAdmin.renderLogo(eval("("+data.logoInfo+")"));
                     miniAdmin.renderClear(options.clearUrl);
-                    miniAdmin.renderHome(data.homeInfo);
+                    miniAdmin.renderHome(eval("("+data.homeInfo+")"));
                     miniAdmin.renderAnim(options.pageAnim);
                     miniAdmin.listen();
                     miniMenu.render({
