@@ -42,18 +42,17 @@ public class MenuController {
     @ResponseBody
     @RequestMapping("loadMenuManagerLeftTreeJson")
     public DataGridView loadMenuManagerLeftTreeJson(){
-        Map<String,Object> map=sysMenuService.menu();
-        List<MenuVo> menuVos=(List<MenuVo>) map.get("menuInfo");
+        List<SysMenu> menus=sysMenuService.findAllMenu();
         List<MenuVo> nodes=new ArrayList<>();
-        if (menuVos!=null){
-            for (MenuVo menuVo:menuVos){
+        if (menus!=null){
+            for (SysMenu menu:menus){
                 MenuVo m=new MenuVo();
-                m.setId(menuVo.getId());
-                m.setPid(menuVo.getPid());
-                m.setTitle(menuVo.getTitle());
-                m.setIcon(menuVo.getIcon());
-                m.setHref(menuVo.getHref());
-                m.setStatus(menuVo.getStatus());
+                m.setId(menu.getId());
+                m.setPid(menu.getPid());
+                m.setTitle(menu.getTitle());
+                m.setIcon(menu.getIcon());
+                m.setHref(menu.getHref());
+                m.setStatus(menu.getStatus());
                 nodes.add(m);
             }
         }

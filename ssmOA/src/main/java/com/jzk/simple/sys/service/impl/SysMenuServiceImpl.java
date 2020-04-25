@@ -48,4 +48,11 @@ public class SysMenuServiceImpl implements SysMenuService {
         map.put("logoInfo", "{title: 'OA管理系统',image: '../resources/images/logo.png'}");
         return map;
     }
+
+    @Override
+    public List<SysMenu> findAllMenu() {
+        return sysMenuMapper.findAllMenu(true);
+    }
+
+
 }
