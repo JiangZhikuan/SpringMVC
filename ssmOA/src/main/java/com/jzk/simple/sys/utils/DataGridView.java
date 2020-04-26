@@ -14,7 +14,7 @@ public class DataGridView {
 
     private Integer code=0;
     private String msg="";
-    private Integer count;
+    private long count;
     private Object data;
 
     public DataGridView(){
@@ -25,7 +25,7 @@ public class DataGridView {
         super();
         this.data=data;
     }
-    public DataGridView(Integer count,Object data){
+    public DataGridView(long count,Object data){
         super();
         this.count= count;
         this.data=data;
@@ -47,11 +47,11 @@ public class DataGridView {
         this.msg = msg;
     }
 
-    public Integer getCount() {
+    public long getCount() {
         return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(long count) {
         this.count = count;
     }
 

@@ -27,7 +27,9 @@ public class TestSysMenuMapper {
 
     @Test
     public void getAllMenus(){
-        List<SysMenu> menus =sysMenuMapper.findAllMenu(true);
+        SysMenuVo sysMenuVo=new SysMenuVo();
+        sysMenuVo.setStatus(true);
+        List<SysMenu> menus =sysMenuMapper.findAllMenu(sysMenuVo);
         for (SysMenu sysMenu:menus){
             System.out.println(sysMenu.getId());
             System.out.println(sysMenu.getPid());

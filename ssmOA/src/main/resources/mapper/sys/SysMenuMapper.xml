@@ -318,14 +318,20 @@
       delete_at = #{deleteAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="findAllMenu" parameterType="java.lang.Boolean"
+  <select id="findAllMenu" parameterType="com.jzk.simple.sys.vo.SysMenuVo"
           resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"></include>
     from sys_menu
     <where>
+      <if test="title != null and title != ''">
+        and title like  concat("%",#{title,jdbcType=VARCHAR},"%")
+      </if>
       <if test="status!=null">
         and  status = #{status,jdbcType=BIT}
+      </if>
+      <if test="id!=null">
+        and (id = #{id,jdbcType=INTEGER} or pid = #{id,jdbcType=INTEGER})
       </if>
     </where>
     ORDER BY pid,sort

@@ -30,5 +30,5 @@ public interface SysMenuMapper {
 
     int updateByPrimaryKey(SysMenu record);
 
-    List<SysMenu> findAllMenu(Boolean status);
+    List<SysMenu> findAllMenu(SysMenuVo sysMenuVo);
 }

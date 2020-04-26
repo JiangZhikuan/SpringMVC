@@ -1,6 +1,7 @@
 package com.jzk.simple.sys.service;
 
 import com.jzk.simple.sys.domain.SysMenu;
+import com.jzk.simple.sys.vo.SysMenuVo;
 
 import java.util.List;
 import java.util.Map;
@@ -18,5 +19,5 @@ public interface SysMenuService {
 
     Map<String,Object> menu();
 
-    List<SysMenu> findAllMenu();
+    List<SysMenu> findAllMenu(SysMenuVo sysMenuVo);
 }

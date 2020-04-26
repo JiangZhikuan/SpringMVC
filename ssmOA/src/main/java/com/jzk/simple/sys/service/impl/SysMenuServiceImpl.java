@@ -5,6 +5,7 @@ import com.jzk.simple.sys.mapper.SysMenuMapper;
 import com.jzk.simple.sys.service.SysMenuService;
 import com.jzk.simple.sys.utils.TreeUtil;
 import com.jzk.simple.sys.vo.MenuVo;
+import com.jzk.simple.sys.vo.SysMenuVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -27,10 +28,15 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Resource
     private SysMenuMapper sysMenuMapper;
 
+    /*
+    * 界面菜单加载
+    * */
     @Override
     public Map<String, Object> menu() {
+        SysMenuVo sysMenuVo=new SysMenuVo();
+        sysMenuVo.setStatus(true);
         Map<String, Object> map = new HashMap<>();
-        List<SysMenu> menuList=sysMenuMapper.findAllMenu(true);
+        List<SysMenu> menuList=sysMenuMapper.findAllMenu(sysMenuVo);
         List<MenuVo> menuInfo=new ArrayList<>();
         for (SysMenu e:menuList){
             MenuVo menuVo=new MenuVo();
@@ -50,8 +56,9 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
-    public List<SysMenu> findAllMenu() {
-        return sysMenuMapper.findAllMenu(true);
+    public List<SysMenu> findAllMenu(SysMenuVo sysMenuVo) {
+        sysMenuVo.setStatus(true);
+        return sysMenuMapper.findAllMenu(sysMenuVo);
     }
 
 

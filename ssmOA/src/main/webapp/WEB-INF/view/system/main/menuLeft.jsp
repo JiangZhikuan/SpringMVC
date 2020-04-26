@@ -24,7 +24,11 @@
 
 </head>
 <body>
-    <ul id="menuTree" class="dtree" data-id="0"></ul>
+    <div class="layuimini-container">
+        <div class="layuimini-main">
+            <ul id="menuTree" class="dtree" data-id="0"></ul>
+        </div>
+    </div>
     <script src="${ctx}/resources/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
     <script src="${ctx}/resources/js/lay-config.js?v=2.0.0" charset="utf-8"></script>
     <script type="text/javascript">
@@ -43,7 +47,7 @@
             dataStyle: "layuiStyle",  //使用layui风格的数据格式
             response:{message:"msg",statusCode:0},  //修改response中返回数据的定义
             dataFormat: "list",  //配置data的风格为list
-            url: "${ctx}/login/loadMenuManagerLeftTreeJson.action" // 使用url加载（可与data加载同时存在）
+            url: "${ctx}/menu/loadMenuManagerLeftTreeJson.action" // 使用url加载（可与data加载同时存在）
         });
 
         //监听树的节点点击 事件

@@ -1,5 +1,7 @@
 package com.jzk.simple.sys.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.jzk.simple.sys.domain.SysMenu;
 import com.jzk.simple.sys.service.SysMenuService;
 import com.jzk.simple.sys.utils.DataGridView;
@@ -24,15 +26,15 @@ import java.util.Map;
  * @Author:JiangZhikuan
  */
 @Controller
-@RequestMapping("login")
+@RequestMapping("menu")
 public class MenuController {
 
     @Autowired
     private SysMenuService sysMenuService;
 
     @ResponseBody
-    @GetMapping("menu")
-    public Map<String,Object> menu(){
+    @GetMapping("loadIndexMenuJson")
+    public Map<String,Object> loadIndexMenuJson(){
         return sysMenuService.menu();
     }
 
@@ -41,8 +43,8 @@ public class MenuController {
     * */
     @ResponseBody
     @RequestMapping("loadMenuManagerLeftTreeJson")
-    public DataGridView loadMenuManagerLeftTreeJson(){
-        List<SysMenu> menus=sysMenuService.findAllMenu();
+    public DataGridView loadMenuManagerLeftTreeJson(SysMenuVo sysMenuVo){
+        List<SysMenu> menus=sysMenuService.findAllMenu(sysMenuVo);
         List<MenuVo> nodes=new ArrayList<>();
         if (menus!=null){
             for (SysMenu menu:menus){
@@ -57,5 +59,15 @@ public class MenuController {
             }
         }
         return new DataGridView(nodes);
+    }
+
+
+    @ResponseBody
+    @RequestMapping("loadAllMenu")
+    public DataGridView loadAllMenu(SysMenuVo sysMenuVo){
+        sysMenuVo.setStatus(true);
+        Page<Object> page= PageHelper.startPage(sysMenuVo.getPage(),sysMenuVo.getLimit());
+        List<SysMenu> sysMenus=sysMenuService.findAllMenu(sysMenuVo);
+        return new DataGridView(page.getTotal(),sysMenus);
     }
 }
