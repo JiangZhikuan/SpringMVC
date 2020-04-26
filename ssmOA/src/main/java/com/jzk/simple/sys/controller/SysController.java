@@ -36,6 +36,6 @@ public class SysController {
     * */
     @RequestMapping("toMenuRight")
     public String toMenuRight(){
-        return "system/main/toMenuRight";
+        return "system/main/menuRight";
     }
 }
