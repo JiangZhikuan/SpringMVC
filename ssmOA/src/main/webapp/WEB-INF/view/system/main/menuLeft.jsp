@@ -32,6 +32,7 @@
     <script src="${ctx}/resources/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
     <script src="${ctx}/resources/js/lay-config.js?v=2.0.0" charset="utf-8"></script>
     <script type="text/javascript">
+        var menuTree;
     layui.extend({
         dtree:'layui_ext/dist/dtree'
     }).use(['layer', 'miniTab','form','dtree','jquery'],function () {
@@ -42,7 +43,7 @@
             miniTab = layui.miniTab;
         miniTab.listen();
         // 初始化树
-        var menuTree = dtree.render({
+        menuTree = dtree.render({
             elem: "#menuTree",
             dataStyle: "layuiStyle",  //使用layui风格的数据格式
             response:{message:"msg",statusCode:0},  //修改response中返回数据的定义

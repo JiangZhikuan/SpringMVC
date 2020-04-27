@@ -336,5 +336,13 @@
     </where>
     ORDER BY pid,sort
   </select>
-  
+  <!-- 根据pid查询菜单数量 -->
+  <select id="queryMenuByPid" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		select count(1) from
+		sys_menu where pid=#{pid,jdbcType=INTEGER}
+	</select>
+  <!-- 根据菜单id删除sys_role_menu里面的数据 -->
+  <delete id="deleteRoleMenuByMid" parameterType="java.lang.Integer">
+		delete from sys_role_menu where mid=#{mid,jdbcType=INTEGER}
+	</delete>
 </mapper>

@@ -13,4 +13,24 @@ public interface SysConstast {
     String USER_LOGIN_ERROR_MSG="用户名或密码不正确";
 
     String VERIFICATION_CODE_MSG="验证码错误";
+
+    String ADD_SUCCESS="添加成功";
+    String ADD_ERROR="添加失败";
+
+    String UPDATE_SUCCESS="更新成功";
+    String UPDATE_ERROR="更新失败";
+
+    String RESET_SUCCESS="重置成功";
+    String RESET_ERROR="重置失败";
+
+    String DISPATCH_SUCCESS="分配成功";
+    String DISPATCH_ERROR="分配失败";
+
+    String DELETE_SUCCESS = "删除成功";
+    String DELETE_ERROR = "删除失败";
+
+    Integer CODE_SUCCESS=0;
+    Integer CODE_ERROR=-1;
+
+
 }

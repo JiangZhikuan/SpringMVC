@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.jzk.simple.sys.domain.SysMenu;
 import com.jzk.simple.sys.service.SysMenuService;
 import com.jzk.simple.sys.utils.DataGridView;
+import com.jzk.simple.sys.utils.ResultObj;
 import com.jzk.simple.sys.vo.MenuVo;
 import com.jzk.simple.sys.vo.SysMenuVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,5 +70,51 @@ public class MenuController {
         Page<Object> page= PageHelper.startPage(sysMenuVo.getPage(),sysMenuVo.getLimit());
         List<SysMenu> sysMenus=sysMenuService.findAllMenu(sysMenuVo);
         return new DataGridView(page.getTotal(),sysMenus);
+    }
+
+
+    @ResponseBody
+    @RequestMapping("addMenu")
+    public ResultObj addMenu(SysMenuVo sysMenuVo){
+        try {
+            sysMenuVo.setIcon("fa "+sysMenuVo.getIcon());
+            this.sysMenuService.addMenu(sysMenuVo);
+            return ResultObj.ADD_SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultObj.ADD_ERROR;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("updateMenu")
+    public ResultObj updateMenu(SysMenuVo sysMenuVo){
+        try {
+            sysMenuVo.setIcon("fa "+sysMenuVo.getIcon());
+            this.sysMenuService.updateMenu(sysMenuVo);
+            return ResultObj.UPDATE_SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultObj.UPDATE_ERROR;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("checkMenuHasChildren")
+    public ResultObj checkMenuHasChildren(SysMenuVo sysMenuVo){
+        Integer count=this.sysMenuService.queryMenuByPid(sysMenuVo.getId());
+        return count>0?ResultObj.STATUS_TRUE:ResultObj.STATUS_FALSE;
+    }
+
+    @ResponseBody
+    @RequestMapping("deleteMenu")
+    public ResultObj deleteMenu(SysMenuVo sysMenuVo){
+        try {
+            this.sysMenuService.deleteMenu(sysMenuVo);
+            return ResultObj.DELETE_SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultObj.DELETE_ERROR;
+        }
     }
 }

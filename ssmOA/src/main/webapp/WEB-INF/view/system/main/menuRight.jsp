@@ -21,6 +21,11 @@
     <link rel="stylesheet" href="${ctx }/resources/css/public.css" media="all" />
     <link rel="stylesheet" href="${ctx }/resources/lib/layui_ext/dtree/dtree.css">
     <link rel="stylesheet" href="${ctx }/resources/lib/layui_ext/dtree/font/dtreefont.css">
+    <link rel="stylesheet" href="${ctx }/resources/lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <style type="text/css">
+        .select-test{position: absolute;max-height: 500px;height: 350px;overflow: auto;width: 100%;z-index: 123;display: none;border:1px solid silver;top: 42px;}
+        .layui-show{display: block!important;}
+    </style>
 </head>
 <body>
 
@@ -63,21 +68,18 @@
     <div style="display: none;padding: 20px" id="saveOrUpdateDiv">
         <form class="layui-form" lay-filter="dataFrm" id="dataFrm">
             <div class="layui-form-item">
-                <label class="layui-form-label">父级菜单:</label>
+                <label class="layui-form-label">父级菜单：</label>
                 <div class="layui-input-block">
-                    <div class="layui-unselect layui-form-select" id="pid-div">
+                    <div class="layui-unselect layui-form-select" id="pid_div">
                         <div class="layui-select-title">
                             <input type="hidden" name="pid" id="pid">
-                            <input type="text" name="pid_str" id="pid_str" placeholder="请选择"
-                                   readonly="" class="layui-input layui-unselect">
+                            <input type="text" name="pid_str" id="pid_str" placeholder="请选择" readonly="" class="layui-input layui-unselect">
                             <i class="layui-edge"></i>
                         </div>
                     </div>
                     <div class="layui-card select-test" id="menuSelectDiv">
                         <div class="layui-card-body">
-                            <div id="toolbarDiv">
-                                <ul id="menuTree" class="dtree" data-id="0" style="width: 100%"></ul>
-                            </div>
+                            <div id="toolbarDiv"><ul id="menuTree" class="dtree" data-id="0" style="width: 100%;"></ul></div>
                         </div>
                     </div>
                 </div>
@@ -90,15 +92,9 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">菜单地址:</label>
-                <div class="layui-input-block">
-                    <input type="text" name="href" placeholder="请输入菜单地址" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
                <div class="layui-inline">
                    <label class="layui-form-label">菜单图标:</label>
-                   <div class="layui-input-inline">
+                   <div class="layui-input-inline"  style="width: 230px">
                        <input type="text" id="icon" name="icon" value="fa-arrows" lay-filter="iconPicker" class="hide">
                    </div>
                </div>
@@ -108,6 +104,12 @@
                         <input type="text" name="target"  placeholder="请输入TRAGET"  autocomplete="off"
                                class="layui-input">
                     </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">菜单地址:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="href" placeholder="请输入菜单地址" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -135,7 +137,8 @@
         let tableIns;
         layui.extend({
             dtree:'layui_ext/dist/dtree'
-        }).use(['jquery', 'layer', 'form', 'table' ,'iconPickerFa','dtree'],function () {
+        }).use(['jquery', 'layer', 'form', 'table' ,'iconPickerFa','dtree'],
+            function () {
             let  $=layui.jquery,
                 layer=layui.layer,
                 form=layui.form,
@@ -143,17 +146,21 @@
                 dtree=layui.dtree,
                 table=layui.table;
 
-            /*iconPickerFa.render({
+            iconPickerFa.render({
                 // 选择器，推荐使用input
-                elem: '#iconPicker',
+                elem: '#icon',
                 // fa 图标接口
                 url: "${ctx}/resources/lib/font-awesome-4.7.0/less/variables.less",
+                // 数据类型：fontClass/unicode，推荐使用fontClass
+                type: 'fontClass',
                 // 是否开启搜索：true/false
                 search: true,
                 // 是否开启分页
                 page: true,
                 // 每页显示数量，默认12
                 limit: 12,
+                //单元格宽度
+                cellWidth:'43px',
                 // 点击回调
                 click: function (data) {
 
@@ -162,7 +169,7 @@
                 success: function (d) {
 
                 }
-            });*/
+            });
 
 
             //初始化表格
@@ -171,7 +178,7 @@
                 url:'${ctx}/menu/loadAllMenu.action',
                 title:'用户数据表',
                 toolbar:'#menuToolBar',
-                height:'full-150',
+                //height:'full-150',
                 cellMinWidth:100,
                 page:true,
                 cols:[[
@@ -202,9 +209,10 @@
             table.on("toolbar(menuTable)",function (obj) {
                 switch (obj.event) {
                         case "add":
+                            openAddMenu();
                             break;
                         case "batchDelete":
-                            layer.msg("批量删除")
+                            layer.msg("批量删除");
                             break;
                 }
             });
@@ -213,13 +221,23 @@
                 let data=obj.data;
                 let layEvent = obj.event;
                 if(layEvent=='del'){
-                    layer.msg("删除");
-                    layer.confirm('真的删除行么',function(index) {
-                        layer.close(index);
-                        //删除操作
-                    });
+                    $.post("${ctx}/menu/checkMenuHasChildren.action?id="+data.id,function (obj) {
+                        if(obj.code>=0){
+                            layer.msg("当前菜单有子节点，请先删除子节点")
+                        }else {
+                            layer.confirm('真的删除【'+data.title+'】这个菜单吗?',
+                                function (index) {
+                                $.post('${ctx}/menu/deleteMenu.action',{id:data.id},function (res) {
+                                    layer.msg(res.msg);
+                                    tableIns.reload();
+                                    window.parent.left.menuTree.reload();
+                                    menuTree.reload();
+                                })
+                            })
+                        }
+                    })
                 }else if(layEvent=='edit'){
-                    layer.msg('修改');
+                    openUpdateMenu(data);
                 }
             });
 
@@ -251,6 +269,10 @@
                     success:function(index){
                         form.val("dataFrm",data);
                         url="${ctx}/menu/updateMenu.action";
+                        var pid=data.pid;
+                        var params=dtree.dataInit('menuTree',pid);
+                        $("#menuSelectDiv").removeClass("layui-show");
+                        $("#pid_str").val(params.context);
                     }
                 });
             }
@@ -261,11 +283,11 @@
                 $.post(url,params,function(obj){
                     layer.msg(obj.msg);
                     //关闭弹出层
-                    layer.close(mainIndex)
+                    layer.close(mainIndex);
                     //刷新数据 表格
                     tableIns.reload();
                     //刷新左边的树
-                    //window.parent.left.menuTree.reload();
+                    window.parent.left.menuTree.reload();
                     //刷新添加和修改的下拉树
                     menuTree.reload();
                 })
@@ -276,7 +298,7 @@
                 dataStyle: "layuiStyle",  //使用layui风格的数据格式
                 response:{message:"msg",statusCode:0},  //修改response中返回数据的定义
                 dataFormat: "list",  //配置data的风格为list
-                url: "${ctx}/menu/loadMenuManagerLeftTreeJson.action?spread=1",  // 使用url加载（可与data加载同时存在）
+                url: "${ctx}/menu/loadMenuManagerLeftTreeJson.action",  // 使用url加载（可与data加载同时存在）
                 icon: "2",
                 accordion:true
             });

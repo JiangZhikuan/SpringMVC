@@ -31,4 +31,8 @@ public interface SysMenuMapper {
     int updateByPrimaryKey(SysMenu record);
 
     List<SysMenu> findAllMenu(SysMenuVo sysMenuVo);
+
+    Integer queryMenuByPid(Integer pid);
+
+    void deleteRoleMenuByMid(Integer id);
 }

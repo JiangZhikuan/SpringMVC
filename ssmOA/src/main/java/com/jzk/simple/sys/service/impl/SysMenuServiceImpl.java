@@ -61,5 +61,25 @@ public class SysMenuServiceImpl implements SysMenuService {
         return sysMenuMapper.findAllMenu(sysMenuVo);
     }
 
+    @Override
+    public void addMenu(SysMenuVo sysMenuVo) {
+        this.sysMenuMapper.insertSelective(sysMenuVo);
+    }
+
+    @Override
+    public void updateMenu(SysMenuVo sysMenuVo) {
+        this.sysMenuMapper.updateByPrimaryKeySelective(sysMenuVo);
+    }
+
+    @Override
+    public Integer queryMenuByPid(Integer pid) {
+        return this.sysMenuMapper.queryMenuByPid(pid);
+    }
+
+    @Override
+    public void deleteMenu(SysMenuVo sysMenuVo) {
+        this.sysMenuMapper.deleteByPrimaryKey(sysMenuVo.getId());
+        this.sysMenuMapper.deleteRoleMenuByMid(sysMenuVo.getId());
+    }
 
 }
