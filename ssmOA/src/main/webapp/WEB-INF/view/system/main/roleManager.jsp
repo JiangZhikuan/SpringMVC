@@ -66,6 +66,10 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </div>
 
+<div style="display: none" id="selectRoleMenu">
+    <ul id="menuTree" class="dtree" data-id="0"></ul>
+</div>
+
 <div style="display: none;padding: 20px" id="saveOrUpdateDiv" >
     <form class="layui-form"  lay-filter="dataFrm" id="dataFrm">
         <div class="layui-form-item">
@@ -119,7 +123,7 @@
             ,url:'${ctx}/role/loadAllRole.action' //数据接口
             ,title: '用户数据表'//数据导出来的标题
             ,toolbar:"#roleToolBar"   //表格的工具条
-            ,height:'full-150'
+            //,height:'full-150'
             ,cellMinWidth:100 //设置列的最小默认宽度
             ,page: true  //是否启用分页
             ,cols: [[   //列表数据
@@ -167,6 +171,8 @@
                 });
             } else if(layEvent === 'edit'){ //编辑
                 openUpdateRole(data);
+            }else if(layEvent==='selectRoleMenu'){
+                openSelectRoleManager(data);
             }
         });
 
@@ -211,6 +217,43 @@
                 tableIns.reload();
             })
         });
+
+        function openSelectRoleManager(data){
+            var menuTree;
+            mainIndex=layer.open({
+                type:1,
+                title:'分配【'+data.rolename+'】的角色',
+                content:$('#selectRoleMenu'),
+                area:['400px','500px'],
+                btnAlign:'c',
+                btn:['<div class="layui-icon layui-icon-release">确认分配</div>','<div class="layui-icon layui-icon-close">取消分配</div>'],
+                yes:function (index,layero) {
+                    let nodes = dtree.getCheckbarNodesParam('menuTree');
+                    let roleid = data.roleid;
+                    let params = 'roleid=' + roleid;
+
+                    $.each(nodes,function (i,item) {
+                        params+='&ids='+item.nodeId;
+                    });
+
+                    $.post("${ctx}/role/saveRoleMenu.action",params,function (obj) {
+                        layer.msg(obj.msg);
+                    });
+                },
+                success:function (index) {
+                    menuTree=dtree.render({
+                        elem:'#menuTree',
+                        dataStyle:'layuiStyle',
+                        response:{message:'msg',statusCode:0},
+                        dataFormat: "list",  //配置data的风格为list
+                        checkbar: true,
+                        checkbarType: "all", // 默认就是all，其他的值为： no-all  p-casc   self  only\
+                        checkbarData: "choose" ,
+                        url: "${ctx}/role/initRoleMenuTreeJson.action?roleid="+data.roleid // 使用url加载（可与data加载同时存在）
+                    })
+                }
+            });
+        }
 
         //批量删除
         function deleteBatch(){

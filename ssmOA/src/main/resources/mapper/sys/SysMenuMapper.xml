@@ -325,7 +325,7 @@
     from sys_menu
     <where>
       <if test="title != null and title != ''">
-        and title like  concat("%",#{title,jdbcType=VARCHAR},"%")
+        and title like  concat('%',#{title,jdbcType=VARCHAR},'%')
       </if>
       <if test="status!=null">
         and  status = #{status,jdbcType=BIT}

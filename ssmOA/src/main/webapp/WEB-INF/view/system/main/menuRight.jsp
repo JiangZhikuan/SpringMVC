@@ -32,25 +32,28 @@
 <div class="layuimini-container">
     <div class="layuimini-main">
         <%--搜索条件--%>
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: ;: 20px">
+        <fieldset class="table-search-fieldset" style="margin-top:20px">
             <legend>查询条件</legend>
-        </fieldset>
-        <form class="layui-form" method="post" id="searchForm">
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label">菜单名称</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="title" autocapitalize="off" class="layui-input">
+            <div style="margin: 10px">
+                <form class="layui-form layui-form-pane" method="post" id="searchForm">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">菜单名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="title" name="title" autocapitalize="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button type="button" class="layui-btn layui-btn-normal layui-icon layui-icon-search"
+                                    id="doSearch">查询</button>
+                            <button type="button" class="layui-btn layui-btn-warm layui-icon layui-icon-refresh">
+                                重置</button>
+                        </div>
                     </div>
-                </div>
-                <div class="layui-inline">
-                    <button type="button" class="layui-btn layui-btn-normal layui-icon layui-icon-search"
-                            id="doSearch">查询</button>
-                    <button type="button" class="layui-btn layui-btn-warm layui-icon layui-icon-refresh">
-                        重置</button>
-                </div>
+                </form>
             </div>
-        </form>
+        </fieldset>
+
 
         <%--数据表格--%>
         <table class="layui-hide" id="menuTab" lay-filter="menuTable"></table>
@@ -64,6 +67,8 @@
         </div>
     </div>
 </div>
+
+
     <%--添加和修改的弹出层--%>
     <div style="display: none;padding: 20px" id="saveOrUpdateDiv">
         <form class="layui-form" lay-filter="dataFrm" id="dataFrm">
