@@ -38,4 +38,9 @@ public class SysController {
     public String toMenuRight(){
         return "system/main/menuRight";
     }
+
+    @RequestMapping("toRoleManager")
+    public String toRoleManager(){
+        return "system/main/roleManager";
+    }
 }
