@@ -38,5 +38,9 @@ public interface SysConstast {
     Integer CODE_SUCCESS=0;
     Integer CODE_ERROR=-1;
 
+    /**
+     * 默认密码配置
+     */
+    String USER_DEFAULT_PWD = "123456";
 
 }

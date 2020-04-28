@@ -219,4 +219,8 @@
   <insert id="insertRoleMenu">
     insert into sys_role_menu(rid,mid) values (#{rid,jdbcType=INTEGER},#{mid,jdbcType=INTEGER})
   </insert>
+  <!--根据用户id删除sys_role_user-->
+  <delete id="deleteRoleUserByUid" parameterType="java.lang.Integer">
+    delete from sys_role_user where uid=#{userId,jdbcType=INTEGER}
+  </delete>
 </mapper>

@@ -32,4 +32,9 @@ public interface SysUserMapper {
     * 登录
     * */
     SysUser login(SysUser user);
+
+    /*
+    * 查询用户
+    * */
+    List<SysUser> queryAllUser(SysUser sysUser);
 }

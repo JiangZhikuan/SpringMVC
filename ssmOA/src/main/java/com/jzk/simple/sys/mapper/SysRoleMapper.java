@@ -35,4 +35,9 @@ public interface SysRoleMapper {
     void deleteRoleUserByRid(Integer roleId);
 
     void insertRoleMenu(@Param("rid")Integer rid,@Param("mid")Integer mid);
+
+    /*
+    * 根据用户id删除sys_role_user
+    * */
+    void deleteRoleUserByUid(Integer userId);
 }
