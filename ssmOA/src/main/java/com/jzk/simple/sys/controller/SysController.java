@@ -20,7 +20,7 @@ public class SysController {
     * */
     @RequestMapping("toMenuManager")
     public String toMenuManager(){
-        return "system/main/menuManager";
+        return "system/menu/menuManager";
     }
 
     /*
@@ -28,7 +28,7 @@ public class SysController {
     * */
     @RequestMapping("toMenuLeft")
     public String toMenuLeft(){
-        return "system/main/menuLeft";
+        return "system/menu/menuLeft";
     }
 
     /*
@@ -36,7 +36,7 @@ public class SysController {
     * */
     @RequestMapping("toMenuRight")
     public String toMenuRight(){
-        return "system/main/menuRight";
+        return "system/menu/menuRight";
     }
 
     @RequestMapping("toRoleManager")
