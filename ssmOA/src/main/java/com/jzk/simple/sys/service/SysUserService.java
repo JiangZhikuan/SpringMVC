@@ -46,4 +46,14 @@ public interface SysUserService {
     * 重置密码
     * */
     void resetUserPwd(Integer userId);
+
+    /*
+    * 加载用户管理分配角色
+    * */
+    DataGridView queryUserRole(Integer userid);
+
+    /*
+    * 保存用户和角色关系
+    * */
+    void saveUserRole(SysUserVo sysUserVo);
 }

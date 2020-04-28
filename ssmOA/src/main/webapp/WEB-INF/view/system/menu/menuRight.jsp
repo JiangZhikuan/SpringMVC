@@ -277,7 +277,8 @@
                         var pid=data.pid;
                         var params=dtree.dataInit('menuTree',pid);
                         $("#menuSelectDiv").removeClass("layui-show");
-                        $("#pid_str").val(params.context);
+                        if(typeof (params)!='undefined')
+                            $("#pid_str").val(params.context);
                     }
                 });
             }

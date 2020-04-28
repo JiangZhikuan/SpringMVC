@@ -223,4 +223,11 @@
   <delete id="deleteRoleUserByUid" parameterType="java.lang.Integer">
     delete from sys_role_user where uid=#{userId,jdbcType=INTEGER}
   </delete>
+  <!--根据有用户id查角色-->
+  <select id="queryRoleByUid" resultMap="BaseResultMap">
+      select
+       t1.*
+       from sys_role t1 inner join sys_role_user t2 on (t1.roleid=t2.rid)
+       where t2.uid= #{uid,jdbcType=INTEGER} and t1.available= #{available,jdbcType=INTEGER}
+  </select>
 </mapper>

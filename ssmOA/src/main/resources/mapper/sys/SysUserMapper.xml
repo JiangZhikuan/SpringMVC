@@ -338,4 +338,9 @@
       and type !=1
     </where>
   </select>
+
+  <!--根据用户ID查询菜单-->
+  <insert id="insetUserRole">
+    insert into sys_role_user(uid,rid) values (#{uid,jdbcType=INTEGER},#{rid,jdbcType=INTEGER})
+  </insert>
 </mapper>

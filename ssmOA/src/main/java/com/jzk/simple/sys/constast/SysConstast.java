@@ -17,6 +17,9 @@ public interface SysConstast {
     Boolean AVAILABLE_TRUE=true;
     Boolean AVAILABLE_FALSE=false;
 
+    Integer AVAILABLE_ROLE_TRUE=1;
+    Integer AVAILABLE_ROLE_FALSE=0;
+
     Integer CODE_ZERO=0;
     Integer CODE_ONE=1;
 

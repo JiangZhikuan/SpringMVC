@@ -37,4 +37,9 @@ public interface SysUserMapper {
     * 查询用户
     * */
     List<SysUser> queryAllUser(SysUser sysUser);
+
+    /*
+    * 保存用户和角色
+    * */
+    void insetUserRole(@Param("uid")Integer userId,@Param("rid")Integer roleId);
 }

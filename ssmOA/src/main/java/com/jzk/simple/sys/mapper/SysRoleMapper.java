@@ -40,4 +40,6 @@ public interface SysRoleMapper {
     * 根据用户id删除sys_role_user
     * */
     void deleteRoleUserByUid(Integer userId);
+
+    List<SysRole> queryRoleByUid(@Param("available")Integer available,@Param("uid")Integer userId);
 }
