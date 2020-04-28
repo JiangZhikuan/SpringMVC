@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80011
 File Encoding         : 65001
 
-Date: 2020-04-24 14:43:45
+Date: 2020-04-28 15:55:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -334,13 +334,13 @@ CREATE TABLE `sys_menu` (
   PRIMARY KEY (`id`),
   KEY `title` (`title`),
   KEY `href` (`href`)
-) ENGINE=InnoDB AUTO_INCREMENT=251 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='系统菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=254 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='系统菜单表';
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
 INSERT INTO `sys_menu` VALUES ('1', '0', '汽车出租系统', 'layui-icon layui-icon-home', '', '_self', '0', '1', '', '2020-04-24 11:26:17', '2020-04-24 11:26:17', '2020-04-24 11:26:17');
-INSERT INTO `sys_menu` VALUES ('2', '0', '系统管理', 'layui-icon layui-icon-windows', '', '_self', '0', '1', '', '2020-04-24 11:26:17', '2020-04-24 11:26:17', '2020-04-24 11:26:17');
+INSERT INTO `sys_menu` VALUES ('2', '0', '系统管理', 'layui-icon layui-icon-website', '', '_self', '0', '1', '', '2020-04-24 11:26:17', '2020-04-24 11:26:17', '2020-04-24 11:26:17');
 INSERT INTO `sys_menu` VALUES ('3', '1', '基础管理', 'layui-icon  layui-icon-app', '', '_self', '0', '1', '', '2020-04-24 11:26:17', '2020-04-24 11:26:17', '2020-04-24 11:26:17');
 INSERT INTO `sys_menu` VALUES ('4', '1', '业务管理', 'layui-icon layui-icon-template', '', '_self', '0', '1', '', '2020-04-24 11:26:17', '2020-04-24 11:26:17', '2020-04-24 11:26:17');
 INSERT INTO `sys_menu` VALUES ('5', '2', '系统设置', 'layui-icon layui-icon-set', '', '_self', '0', '1', '', '2020-04-24 11:26:17', '2020-04-24 11:26:17', '2020-04-24 11:26:17');
@@ -356,10 +356,11 @@ INSERT INTO `sys_menu` VALUES ('14', '5', '角色管理', 'layui-icon layui-icon
 INSERT INTO `sys_menu` VALUES ('15', '5', '用户管理', 'layui-icon layui-icon-user', '../sys/toUserManager.action', '_self', '0', '1', '', '2020-04-24 11:26:17', '2020-04-24 11:26:17', '2020-04-24 11:26:17');
 INSERT INTO `sys_menu` VALUES ('16', '5', '日志管理', 'layui-icon layui-icon-file-b', '../sys/toLogInfoManager.action', '_self', '0', '1', '', '2020-04-24 11:26:17', '2020-04-24 11:26:17', '2020-04-24 11:26:17');
 INSERT INTO `sys_menu` VALUES ('17', '5', '公告管理', 'layui-icon layui-icon-speaker', '../sys/toNewsManager.action', '_self', '0', '1', '', '2020-04-24 11:26:17', '2020-04-24 11:26:17', '2020-04-24 11:26:17');
-INSERT INTO `sys_menu` VALUES ('18', '5', '数据源监控', 'layui-icon layui-icon-component', '../druid/', '_self', '0', '1', '', '2020-04-24 11:26:17', '2020-04-24 11:26:17', '2020-04-24 11:26:17');
 INSERT INTO `sys_menu` VALUES ('19', '6', '地区统计', 'layui-icon layui-icon-form', '../stat/toCustomerAreaStat.action', '_self', '0', '1', '', '2020-04-24 11:26:17', '2020-04-24 11:26:17', '2020-04-24 11:26:17');
 INSERT INTO `sys_menu` VALUES ('20', '6', '销售额统计', 'layui-icon layui-icon-chart', '../stat/toCompanyYearGradeStat.action', '_self', '0', '1', '', '2020-04-24 11:26:17', '2020-04-24 11:26:17', '2020-04-24 11:26:17');
 INSERT INTO `sys_menu` VALUES ('21', '6', '年度销售额', 'layui-icon layui-icon-table', '../stat/toOpernameYearGradeStat.action', '_self', '0', '1', '', '2020-04-24 11:26:17', '2020-04-24 11:26:17', '2020-04-24 11:26:17');
+INSERT INTO `sys_menu` VALUES ('251', '2', '系统监测', 'fa fa-ambulance', '', '', '0', '1', null, null, null, null);
+INSERT INTO `sys_menu` VALUES ('253', '251', '数据源监测', 'fa fa-database', '../druid', '', '0', '1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for sys_menu1
@@ -473,9 +474,11 @@ INSERT INTO `sys_role_menu` VALUES ('1', '14');
 INSERT INTO `sys_role_menu` VALUES ('1', '15');
 INSERT INTO `sys_role_menu` VALUES ('1', '16');
 INSERT INTO `sys_role_menu` VALUES ('1', '17');
-INSERT INTO `sys_role_menu` VALUES ('1', '18');
 INSERT INTO `sys_role_menu` VALUES ('1', '19');
 INSERT INTO `sys_role_menu` VALUES ('1', '20');
+INSERT INTO `sys_role_menu` VALUES ('1', '21');
+INSERT INTO `sys_role_menu` VALUES ('1', '251');
+INSERT INTO `sys_role_menu` VALUES ('1', '253');
 INSERT INTO `sys_role_menu` VALUES ('2', '1');
 INSERT INTO `sys_role_menu` VALUES ('2', '2');
 INSERT INTO `sys_role_menu` VALUES ('2', '3');
@@ -495,7 +498,6 @@ INSERT INTO `sys_role_menu` VALUES ('3', '16');
 INSERT INTO `sys_role_menu` VALUES ('3', '17');
 INSERT INTO `sys_role_menu` VALUES ('4', '1');
 INSERT INTO `sys_role_menu` VALUES ('4', '5');
-INSERT INTO `sys_role_menu` VALUES ('4', '18');
 INSERT INTO `sys_role_menu` VALUES ('4', '19');
 INSERT INTO `sys_role_menu` VALUES ('4', '20');
 
@@ -512,11 +514,11 @@ CREATE TABLE `sys_role_user` (
 -- ----------------------------
 -- Records of sys_role_user
 -- ----------------------------
-INSERT INTO `sys_role_user` VALUES ('3', '1');
+INSERT INTO `sys_role_user` VALUES ('3', '4');
 INSERT INTO `sys_role_user` VALUES ('4', '2');
 INSERT INTO `sys_role_user` VALUES ('5', '3');
 INSERT INTO `sys_role_user` VALUES ('6', '4');
-INSERT INTO `sys_role_user` VALUES ('7', '3');
+INSERT INTO `sys_role_user` VALUES ('7', '2');
 INSERT INTO `sys_role_user` VALUES ('7', '4');
 
 -- ----------------------------
@@ -542,7 +544,7 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', 'admin', '4313341334413', '超级管理员', '1', '武汉', '134441331311', 'e10adc3949ba59abbe56e057f20f883e', 'CEO', '1', '1');
-INSERT INTO `sys_user` VALUES ('3', 'zhangsan', '3413334134131131', '张三', '1', '武汉', '134131313111', 'e10adc3949ba59abbe56e057f20f883e', 'BA', '2', '1');
+INSERT INTO `sys_user` VALUES ('3', 'zhangsan', '3413334134131131', '张三', '1', '武汉', '13400100010', 'e10adc3949ba59abbe56e057f20f883e', 'BA', '2', '1');
 INSERT INTO `sys_user` VALUES ('4', 'ls', '43311341311314341', '李四', '1', '武汉', '1341314113131', 'e10adc3949ba59abbe56e057f20f883e', '扫地的', '2', '1');
 INSERT INTO `sys_user` VALUES ('5', 'ww', '4313133131331312', '王五', '1', '武汉', '13413131131', 'e10adc3949ba59abbe56e057f20f883e', '领导', '2', '1');
 INSERT INTO `sys_user` VALUES ('6', 'xm', '45113141331131131', '小明', '0', '武昌', '13451333131', 'e10adc3949ba59abbe56e057f20f883e', '扫地地', '2', '1');
