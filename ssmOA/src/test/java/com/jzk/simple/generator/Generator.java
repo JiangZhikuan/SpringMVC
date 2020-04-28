@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class Generator {
 
-    @Test
+    //@Test
     public void generator() {
         try {
             List<String> warnings=new ArrayList<>();

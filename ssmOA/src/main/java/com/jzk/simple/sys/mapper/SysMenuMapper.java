@@ -35,4 +35,6 @@ public interface SysMenuMapper {
     Integer queryMenuByPid(Integer pid);
 
     void deleteRoleMenuByMid(Integer id);
+
+    List<SysMenu> queryMenuByRoleId(@Param("status") Boolean status,@Param("roleId") Integer roleId);
 }

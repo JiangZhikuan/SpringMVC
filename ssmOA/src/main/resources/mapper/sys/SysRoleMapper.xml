@@ -210,9 +210,13 @@
     </where>
   </select>
   <delete id="deleteRoleMenuByRid" parameterType="java.lang.Integer">
-    delete  from  sys_role_menu when rid = #{roleId,jdbcType=INTEGER}
+    delete  from  sys_role_menu where rid = #{roleId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteRoleUserByRid" parameterType="java.lang.Integer">
     delete from sys_role_user where rid=#{roleId,jdbcType=INTEGER}
   </delete>
+  <!--保存角色菜单直接的关系-->
+  <insert id="insertRoleMenu">
+    insert into sys_role_menu(rid,mid) values (#{rid,jdbcType=INTEGER},#{mid,jdbcType=INTEGER})
+  </insert>
 </mapper>

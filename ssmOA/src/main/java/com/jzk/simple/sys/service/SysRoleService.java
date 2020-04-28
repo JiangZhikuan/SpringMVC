@@ -28,4 +28,10 @@ public interface SysRoleService {
 
     //批量删除
     void deleteBatchRole(Integer[] ids);
+
+    //加载角色管理分配菜单json
+    DataGridView initRoleMenuTreeJson(Integer roleid);
+
+    //保存角色和菜单关系
+    void saveRoleMenu(SysRoleVo sysRoleVo);
 }

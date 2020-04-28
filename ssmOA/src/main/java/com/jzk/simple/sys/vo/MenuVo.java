@@ -20,6 +20,8 @@ public class MenuVo {
 
     private Boolean status;
 
+    private String checkArr="0";
+
     private List<MenuVo> child;
 
     public Integer getId() {
@@ -84,5 +86,13 @@ public class MenuVo {
 
     public void setChild(List<MenuVo> child) {
         this.child = child;
+    }
+
+    public String getCheckArr() {
+        return checkArr;
+    }
+
+    public void setCheckArr(String checkArr) {
+        this.checkArr = checkArr;
     }
 }

@@ -33,4 +33,6 @@ public interface SysRoleMapper {
     void deleteRoleMenuByRid(Integer roleId);
 
     void deleteRoleUserByRid(Integer roleId);
+
+    void insertRoleMenu(@Param("rid")Integer rid,@Param("mid")Integer mid);
 }

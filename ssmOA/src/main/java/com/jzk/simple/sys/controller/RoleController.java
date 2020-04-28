@@ -85,4 +85,28 @@ public class RoleController {
         }
     }
 
+    /*
+    * 加载角色管理
+    * */
+    @ResponseBody
+    @RequestMapping("initRoleMenuTreeJson")
+    public DataGridView initRoleMenuTreeJson(Integer roleid){
+        return this.sysRoleService.initRoleMenuTreeJson(roleid);
+    }
+
+    /*
+    *保存角色和菜单关系
+    * */
+    @ResponseBody
+    @RequestMapping("saveRoleMenu")
+    public ResultObj saveRoleMenu(SysRoleVo sysRoleVo){
+        try {
+            this.sysRoleService.saveRoleMenu(sysRoleVo);
+            return ResultObj.DISPATCH_SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultObj.DISPATCH_ERROR;
+        }
+    }
+
 }

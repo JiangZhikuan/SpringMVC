@@ -344,5 +344,14 @@
   <!-- 根据菜单id删除sys_role_menu里面的数据 -->
   <delete id="deleteRoleMenuByMid" parameterType="java.lang.Integer">
 		delete from sys_role_menu where mid=#{mid,jdbcType=INTEGER}
-	</delete>
+    </delete>
+
+
+  <!--查询当前角色按钮-->
+  <select id="queryMenuByRoleId" resultMap="BaseResultMap">
+    select
+    t1.*
+    from sys_menu t1 inner join sys_role_menu t2 on (t1.id=t2.mid)
+    where t2.rid=#{roleId,jdbcType=INTEGER} and t1.status = #{status,jdbcType=BIT}
+  </select>
 </mapper>
