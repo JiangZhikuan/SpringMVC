@@ -53,4 +53,9 @@ public class SysController {
     public String toLogInfoManager(){
         return "system/logInfo/LogInfoManager";
     }
+
+    @RequestMapping("toNewsManager")
+    public String toNewsManager(){
+        return "system/news/newsManager";
+    }
 }
