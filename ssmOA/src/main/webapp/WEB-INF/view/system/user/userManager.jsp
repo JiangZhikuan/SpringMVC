@@ -175,14 +175,11 @@
 <script src="${ctx}/resources/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script src="${ctx}/resources/js/lay-config.js?v=2.0.0" charset="utf-8"></script>
 <script type="text/javascript">
-    layui.extend({
-        dtree:'layui_ext/dist/dtree'
-    }).use([ 'jquery', 'layer', 'form', 'table','dtree' ],function () {
+    layui.use([ 'jquery', 'layer', 'form', 'table' ],function () {
         var $ = layui.jquery,
             layer = layui.layer,
             form = layui.form,
-            table = layui.table,
-            dtree = layui.dtree;
+            table = layui.table;
         var tableIns=table.render({
             elem: '#userTable'   //渲染的目标对象
             ,url:'${ctx}/user/loadAllUser.action' //数据接口

@@ -2,10 +2,13 @@ package com.jzk.simple.sys.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.jzk.simple.sys.constast.SysConstast;
 import com.jzk.simple.sys.domain.SysMenu;
+import com.jzk.simple.sys.domain.SysUser;
 import com.jzk.simple.sys.service.SysMenuService;
 import com.jzk.simple.sys.utils.DataGridView;
 import com.jzk.simple.sys.utils.ResultObj;
+import com.jzk.simple.sys.utils.WebUtils;
 import com.jzk.simple.sys.vo.MenuVo;
 import com.jzk.simple.sys.vo.SysMenuVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +38,9 @@ public class MenuController {
 
     @ResponseBody
     @GetMapping("loadIndexMenuJson")
-    public Map<String,Object> loadIndexMenuJson(){
-        return sysMenuService.menu();
+    public Map<String,Object> loadIndexMenuJson(SysMenuVo sysMenuVo){
+        SysUser sysUser=(SysUser)WebUtils.getHttpSession().getAttribute("user");
+        return sysMenuService.menu(SysConstast.AVAILABLE_TRUE,sysUser.getUserid());
     }
 
     /*

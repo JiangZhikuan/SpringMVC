@@ -2,10 +2,10 @@ package com.jzk.simple.sys.mapper;
 
 import com.jzk.simple.sys.domain.SysMenu;
 import com.jzk.simple.sys.domain.SysMenuExample;
-import java.util.List;
-
 import com.jzk.simple.sys.vo.SysMenuVo;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface SysMenuMapper {
     long countByExample(SysMenuExample example);
@@ -37,4 +37,7 @@ public interface SysMenuMapper {
     void deleteRoleMenuByMid(Integer id);
 
     List<SysMenu> queryMenuByRoleId(@Param("status") Boolean status,@Param("roleId") Integer roleId);
+
+    List<SysMenu> queryMenuByUid(@Param("status") Boolean available,@Param("uid")Integer userId);
+
 }

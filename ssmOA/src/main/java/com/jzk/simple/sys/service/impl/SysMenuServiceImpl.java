@@ -32,11 +32,9 @@ public class SysMenuServiceImpl implements SysMenuService {
     * 界面菜单加载
     * */
     @Override
-    public Map<String, Object> menu() {
-        SysMenuVo sysMenuVo=new SysMenuVo();
-        sysMenuVo.setStatus(true);
+    public Map<String, Object> menu(Boolean status,Integer userId) {
         Map<String, Object> map = new HashMap<>();
-        List<SysMenu> menuList=sysMenuMapper.findAllMenu(sysMenuVo);
+        List<SysMenu> menuList=sysMenuMapper.queryMenuByUid(status,userId);
         List<MenuVo> menuInfo=new ArrayList<>();
         for (SysMenu e:menuList){
             MenuVo menuVo=new MenuVo();
@@ -80,6 +78,11 @@ public class SysMenuServiceImpl implements SysMenuService {
     public void deleteMenu(SysMenuVo sysMenuVo) {
         this.sysMenuMapper.deleteByPrimaryKey(sysMenuVo.getId());
         this.sysMenuMapper.deleteRoleMenuByMid(sysMenuVo.getId());
+    }
+
+    @Override
+    public List<SysMenu> queryMenuByUserIdForList(SysMenuVo sysMenuVo, Integer userId) {
+        return this.sysMenuMapper.queryMenuByUid(sysMenuVo.getStatus(),userId);
     }
 
 }

@@ -1,8 +1,8 @@
 package com.jzk.simple.sys.service;
 
 import com.jzk.simple.sys.domain.SysMenu;
+import com.jzk.simple.sys.domain.SysUser;
 import com.jzk.simple.sys.vo.SysMenuVo;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +18,7 @@ import java.util.Map;
 
 public interface SysMenuService {
 
-    Map<String,Object> menu();
+    Map<String,Object> menu(Boolean status,Integer userId);
 
     List<SysMenu> findAllMenu(SysMenuVo sysMenuVo);
 
@@ -29,4 +29,6 @@ public interface SysMenuService {
     Integer queryMenuByPid(Integer  pid);
 
     void deleteMenu(SysMenuVo sysMenuVo);
+
+    List<SysMenu> queryMenuByUserIdForList(SysMenuVo sysMenuVo,Integer userId);
 }

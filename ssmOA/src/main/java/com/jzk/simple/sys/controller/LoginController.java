@@ -2,13 +2,17 @@ package com.jzk.simple.sys.controller;
 
 import com.jzk.simple.sys.constast.SysConstast;
 import com.jzk.simple.sys.domain.SysUser;
+import com.jzk.simple.sys.service.LogInfoService;
 import com.jzk.simple.sys.service.SysUserService;
 import com.jzk.simple.sys.utils.WebUtils;
+import com.jzk.simple.sys.vo.SysLogLoginVo;
 import com.jzk.simple.sys.vo.SysUserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Date;
 
 /**
  * ClassName:LoginController
@@ -24,6 +28,9 @@ public class LoginController {
 
     @Autowired
     private SysUserService sysUserService;
+
+    @Autowired
+    private LogInfoService logInfoService;
 
     /*
     * 跳转登录界面
@@ -49,6 +56,11 @@ public class LoginController {
         SysUser sysUser=this.sysUserService.login(sysUserVo);
         if(null!=sysUser){
             WebUtils.getHttpSession().setAttribute("user",sysUser);
+            SysLogLoginVo logLoginVo=new SysLogLoginVo();
+            logLoginVo.setLogintime(new Date());
+            logLoginVo.setLoginname(sysUser.getRealname()+"_"+sysUser.getLoginname());
+            logLoginVo.setLoginip(WebUtils.getHttpServletRequest().getRemoteAddr());
+            logInfoService.addLogInfo(logLoginVo);
             return "system/main/index";
         }else {
             model.addAttribute("error", SysConstast.USER_LOGIN_ERROR_MSG);

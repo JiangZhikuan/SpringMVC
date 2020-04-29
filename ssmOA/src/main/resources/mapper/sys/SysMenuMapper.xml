@@ -354,4 +354,12 @@
     from sys_menu t1 inner join sys_role_menu t2 on (t1.id=t2.mid)
     where t2.rid=#{roleId,jdbcType=INTEGER} and t1.status = #{status,jdbcType=BIT}
   </select>
+
+  <!--根据用户id查询菜单-->
+  <select id="queryMenuByUid" resultMap="BaseResultMap">
+    select distinct t1.* from
+    sys_menu t1 inner join sys_role_menu t2 inner join sys_role_user t3
+    on(t1.id=t2.mid and t2.rid=t3.rid)
+    where t3.uid=#{uid,jdbcType=INTEGER} and t1.status = #{status,jdbcType=BIT}
+  </select>
 </mapper>
