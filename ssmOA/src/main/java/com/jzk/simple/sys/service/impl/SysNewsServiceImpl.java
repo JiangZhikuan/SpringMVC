@@ -54,4 +54,9 @@ public class SysNewsServiceImpl implements SysNewsService {
             this.deleteNews(id);
         }
     }
+
+    @Override
+    public SysNews loadNewsById(Integer id) {
+        return this.sysNewsMapper.selectByPrimaryKey(id);
+    }
 }

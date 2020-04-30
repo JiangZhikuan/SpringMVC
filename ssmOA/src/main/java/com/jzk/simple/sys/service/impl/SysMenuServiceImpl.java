@@ -48,7 +48,7 @@ public class SysMenuServiceImpl implements SysMenuService {
             menuInfo.add(menuVo);
         }
         map.put("menuInfo", TreeUtil.toTree(menuInfo,0));
-        map.put("homeInfo", "{title: '首页',href: '../desk/toDeskManager.action'}");
+        map.put("homeInfo", "{title: '首页',href: '../sys/toDeskManager.action'}");
         map.put("logoInfo", "{title: 'OA管理系统',image: '../resources/images/logo.png'}");
         return map;
     }

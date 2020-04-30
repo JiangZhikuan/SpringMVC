@@ -1,5 +1,6 @@
 package com.jzk.simple.sys.service;
 
+import com.jzk.simple.sys.domain.SysNews;
 import com.jzk.simple.sys.utils.DataGridView;
 import com.jzk.simple.sys.vo.SysNewsVo;
 
@@ -23,4 +24,6 @@ public interface SysNewsService {
     void deleteNews(Integer newId);
 
     void deleteBatchNews(Integer[] ids);
+
+    SysNews loadNewsById(Integer id);
 }

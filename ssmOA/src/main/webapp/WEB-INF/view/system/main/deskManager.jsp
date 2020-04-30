@@ -21,31 +21,40 @@
 
 </head>
 <body>
-<div class="layuimini-container">
-    <div class="layuimini-main">
-        <blockquote class="layui-elem-quote layui-bg-green">
-            <div id="nowTime"></div>
-        </blockquote>
-        <div class="layui-row layui-col-space10">
-            <div class="layui-col-lg6 layui-col-md6">
-                <blockquote class="layui-elem-quote title">最新文章 <i class="layui-icon layui-red">&#xe756;</i></blockquote>
-                <table class="layui-table mag0" lay-skin="line">
-                    <colgroup>
-                        <col>
-                        <col width="110">
-                    </colgroup>
-                    <tbody class="hot_news"></tbody>
-                </table>
-
-            </div>
-        </div>
+<blockquote class="layui-elem-quote layui-bg-green">
+    <div id="nowTime"></div>
+</blockquote>
+<div class="layui-row layui-col-space10">
+    <div class="layui-col-lg6 layui-col-md6">
+        <blockquote class="layui-elem-quote title">最新文章 <i class="layui-icon layui-red">&#xe756;</i></blockquote>
+        <table class="layui-table mag0" lay-skin="line">
+            <colgroup>
+                <col>
+                <col width="110">
+            </colgroup>
+            <tbody class="hot_news"></tbody>
+        </table>
     </div>
 </div>
+
+<!-- 查看公告的div -->
+<div id="desk_viewNewsDiv" style="padding: 10px;display: none;">
+    <h2 id="view_title" align="center"></h2>
+    <hr>
+    <div style="text-align: right;">
+        发布人:<span id="view_opername"></span>  <span style="display: inline-block;width: 20px" ></span>
+        发布时间:<span id="view_createtime"></span>
+    </div>
+    <hr>
+    <div id="view_content"></div>
+</div>
+
 <script src="${ctx}/resources/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script src="${ctx}/resources/js/lay-config.js?v=2.0.0" charset="utf-8"></script>
 <script type="text/javascript">
     //获取系统时间
     let newDate = '';
+
     getLangDate();
     //值小于10时，在前面补0
     function dateFilter(date){
@@ -69,13 +78,9 @@
         setTimeout("getLangDate()",1000);
     }
     layui.use(['layer', 'miniTab','form','element','jquery'], function () {
-        let form = layui.form,
-            layer = parent.layer === undefined ? layui.layer : top.layer,
-            element = layui.element,
-            $ = layui.jquery,
-            miniTab = layui.miniTab;
+        let $ = layui.jquery,
+            layer = parent.layer === undefined ? layui.layer : top.layer;
 
-        miniTab.listen();
         //上次登录时间【此处应该从接口获取，实际使用中请自行更换】
         $(".loginTime").html(newDate.split("日")[0]+"日</br>"+newDate.split("日")[1]);
         //icon动画
@@ -88,19 +93,38 @@
             parent.addTab($(this));
         })
         //最新文章列表
-        $.get("${ctx}/resources/api/newsList.json",function(data){
+        $.get("${ctx}/news/loadAllNews.action?page=1&limit=10",function(data){
             var hotNewsHtml = '';
             for(var i=0;i<5;i++){
-                hotNewsHtml += '<tr>'
-                    +'<td align="left"><a href="javascript:;"> '+data.data[i].newsName+'</a></td>'
-                    +'<td>'+data.data[i].newsTime.substring(0,10)+'</td>'
+                hotNewsHtml += '<tr class="trNew" newId="'+data.data[i].id+'">'
+                    +'<td align="left"><a href="javascript:;"> '+data.data[i].title+'</a></td>'
+                    +'<td>'+data.data[i].createtime.substring(0,10)+'</td>'
                     +'</tr>';
             }
             $(".hot_news").html(hotNewsHtml);
             $(".userAll span").text(data.length);
-        })
 
+            //弹出层有问题，暂时不用
+            /*$('.trNew').dblclick(function () {
+                $.get("${ctx}/news/loadNewsById.action",{id:this.getAttribute('newId')},function(news){
+                    layer.open({
+                        type:1,
+                        title:'查看公告',
+                        content:$("#desk_viewNewsDiv"),
+                        area:['800px','550px'],
+                        success:function(index){
+                            $("#view_title").html(news.title);
+                            $("#view_opername").html(news.opername);
+                            $("#view_createtime").html(news.createtime);
+                            $("#view_content").html(news.content);
+                        }
+                    });
+                })
+            });*/
+
+        })
     });
+
 </script>
 </body>
 </html>
