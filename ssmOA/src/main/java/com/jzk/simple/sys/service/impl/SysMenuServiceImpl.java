@@ -53,33 +53,52 @@ public class SysMenuServiceImpl implements SysMenuService {
         return map;
     }
 
+    /*
+    * 添加查找所有按钮
+    * */
     @Override
     public List<SysMenu> findAllMenu(SysMenuVo sysMenuVo) {
         sysMenuVo.setStatus(true);
         return sysMenuMapper.findAllMenu(sysMenuVo);
     }
 
+    /*
+    * 增加按钮
+    * */
     @Override
     public void addMenu(SysMenuVo sysMenuVo) {
         this.sysMenuMapper.insertSelective(sysMenuVo);
     }
 
+
+    /*
+    * 修改按钮
+    * */
     @Override
     public void updateMenu(SysMenuVo sysMenuVo) {
         this.sysMenuMapper.updateByPrimaryKeySelective(sysMenuVo);
     }
 
+    /*
+    *根据父节点id查询子节点个数
+    * */
     @Override
     public Integer queryMenuByPid(Integer pid) {
         return this.sysMenuMapper.queryMenuByPid(pid);
     }
 
+    /*
+    * 删除按钮
+    * */
     @Override
     public void deleteMenu(SysMenuVo sysMenuVo) {
         this.sysMenuMapper.deleteByPrimaryKey(sysMenuVo.getId());
         this.sysMenuMapper.deleteRoleMenuByMid(sysMenuVo.getId());
     }
 
+    /*
+    * 根据userId查询可用按钮
+    * */
     @Override
     public List<SysMenu> queryMenuByUserIdForList(SysMenuVo sysMenuVo, Integer userId) {
         return this.sysMenuMapper.queryMenuByUid(sysMenuVo.getStatus(),userId);

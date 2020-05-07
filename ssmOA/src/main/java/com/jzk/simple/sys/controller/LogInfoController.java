@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * ClassName:LogInfoController
  * Package:com.jzk.simple.sys.controller
  * Description:
- *
+ *              Controller日志记录控制器
  * @Date:2020/4/29 9:58
  * @Author:JiangZhikuan
  */
@@ -25,12 +25,18 @@ public class LogInfoController {
     @Autowired
     private LogInfoService logInfoService;
 
+    /*
+    * 加载所有日志
+    * */
     @ResponseBody
     @RequestMapping("loadAllLogInfo")
     public DataGridView loadAllLogInfo(SysLogLoginVo sysLogLoginVo){
         return this.logInfoService.queryAllLoginInfo(sysLogLoginVo);
     }
 
+    /*
+    * 删除选中日志
+    * */
     @ResponseBody
     @RequestMapping("deleteLogInfo")
     public ResultObj deleteLogInfo(SysLogLoginVo sysLogLoginVo){
@@ -43,6 +49,9 @@ public class LogInfoController {
         }
     }
 
+    /*
+    * 批量删除日志
+    * */
     @ResponseBody
     @RequestMapping("deleteBatchLogInfo")
     public ResultObj deleteBatchLogInfo(SysLogLoginVo sysLogLoginVo){

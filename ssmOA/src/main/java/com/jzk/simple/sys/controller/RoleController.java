@@ -33,7 +33,9 @@ public class RoleController {
         return this.sysRoleService.queryAllRole(sysRoleVo);
     }
 
-    //添加角色
+    /*
+    * 添加角色
+    * */
     @ResponseBody
     @RequestMapping("addRole")
     public ResultObj addRole(SysRoleVo sysRoleVo){
@@ -46,7 +48,9 @@ public class RoleController {
         }
     }
 
-    //修改角色
+    /*
+    * 修改角色
+    * */
     @ResponseBody
     @RequestMapping("updateRole")
     public ResultObj updateRole(SysRoleVo sysRoleVo){
@@ -59,7 +63,9 @@ public class RoleController {
         }
     }
 
-    //删除角色
+    /*
+    * 删除角色
+    * */
     @ResponseBody
     @RequestMapping("deleteRole")
     public ResultObj deleteRole(SysRoleVo sysRoleVo){
@@ -72,7 +78,9 @@ public class RoleController {
         }
     }
 
-    //批量删除角色
+    /*
+    * 批量删除角色
+    * */
     @ResponseBody
     @RequestMapping("deleteBatchRole")
     public ResultObj deleteBatchRole(SysRoleVo sysRoleVo){

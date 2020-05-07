@@ -16,6 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SysController {
 
     /*
+     * 跳转登录界面
+     * */
+    @RequestMapping("toLogin")
+    public String toLogin(){
+        return "system/main/login";
+    }
+
+    /*
     * 跳转菜单管理
     * */
     @RequestMapping("toMenuManager")

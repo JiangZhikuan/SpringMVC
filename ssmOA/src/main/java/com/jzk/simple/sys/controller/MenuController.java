@@ -25,7 +25,7 @@ import java.util.Map;
  * ClassName:MenuController
  * Package:com.jzk.simple.sys.controller
  * Description:
- *
+ *              Controller:菜单相关
  * @Date:2020/4/24 13:13
  * @Author:JiangZhikuan
  */
@@ -36,6 +36,9 @@ public class MenuController {
     @Autowired
     private SysMenuService sysMenuService;
 
+    /*
+    * 登录初始化功能菜单
+    * */
     @ResponseBody
     @GetMapping("loadIndexMenuJson")
     public Map<String,Object> loadIndexMenuJson(SysMenuVo sysMenuVo){
@@ -67,6 +70,9 @@ public class MenuController {
     }
 
 
+    /*
+    * 加载全部按钮
+    * */
     @ResponseBody
     @RequestMapping("loadAllMenu")
     public DataGridView loadAllMenu(SysMenuVo sysMenuVo){
@@ -77,6 +83,9 @@ public class MenuController {
     }
 
 
+    /*
+    * 增加按钮
+    * */
     @ResponseBody
     @RequestMapping("addMenu")
     public ResultObj addMenu(SysMenuVo sysMenuVo){
@@ -90,6 +99,9 @@ public class MenuController {
         }
     }
 
+    /*
+    * 修改按钮
+    * */
     @ResponseBody
     @RequestMapping("updateMenu")
     public ResultObj updateMenu(SysMenuVo sysMenuVo){
@@ -103,6 +115,9 @@ public class MenuController {
         }
     }
 
+    /*
+    *判断是否有子节点
+    * */
     @ResponseBody
     @RequestMapping("checkMenuHasChildren")
     public ResultObj checkMenuHasChildren(SysMenuVo sysMenuVo){
@@ -110,6 +125,9 @@ public class MenuController {
         return count>0?ResultObj.STATUS_TRUE:ResultObj.STATUS_FALSE;
     }
 
+    /*
+    * 删除按钮
+    * */
     @ResponseBody
     @RequestMapping("deleteMenu")
     public ResultObj deleteMenu(SysMenuVo sysMenuVo){

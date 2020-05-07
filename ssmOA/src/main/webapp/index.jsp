@@ -12,6 +12,6 @@
     <title>登录</title>
 </head>
 <body>
-    <jsp:forward page="login/toLogin.action"></jsp:forward>
+    <jsp:forward page="sys/toLogin.action"></jsp:forward>
 </body>
 </html>
