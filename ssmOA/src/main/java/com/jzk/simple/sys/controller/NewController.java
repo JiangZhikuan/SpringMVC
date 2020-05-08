@@ -29,12 +29,18 @@ public class NewController {
     @Autowired
     private SysNewsService sysNewsService;
 
+    /*
+    * 加载所用新闻
+    * */
     @ResponseBody
     @RequestMapping("loadAllNews")
     public DataGridView loadAllNews(SysNewsVo sysNewsVo){
         return this.sysNewsService.queryAllNews(sysNewsVo);
     }
 
+    /*
+    * 增加新闻
+    * */
     @ResponseBody
     @RequestMapping("addNews")
     public ResultObj addNews(SysNewsVo sysNewsVo){
@@ -50,6 +56,9 @@ public class NewController {
         }
     }
 
+    /*
+    * 修改新闻
+    * */
     @ResponseBody
     @RequestMapping("updateNews")
     public ResultObj updateNews(SysNewsVo sysNewsVo){
@@ -64,6 +73,9 @@ public class NewController {
         }
     }
 
+    /*
+    * 删除新闻
+    * */
     @ResponseBody
     @RequestMapping("deleteNews")
     public ResultObj deleteNews(SysNewsVo sysNewsVo){
@@ -76,6 +88,9 @@ public class NewController {
         }
     }
 
+    /*
+    * 批量删除
+    * */
     @ResponseBody
     @RequestMapping("deleteBatchNews")
     public ResultObj deleteBatchNews(SysNewsVo sysNewsVo){
@@ -88,6 +103,9 @@ public class NewController {
         }
     }
 
+    /*
+    * 根据Id查找新闻
+    * */
     @ResponseBody
     @RequestMapping("loadNewsById")
     public SysNews loadNewsById(Integer id){

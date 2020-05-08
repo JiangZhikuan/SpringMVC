@@ -25,7 +25,7 @@ import java.util.Map;
  * ClassName:SysUserServiceImpl
  * Package:com.jzk.simple.sys.service.impl
  * Description:
- *
+ *              service:用户相关服务接口实现方法
  * @Date:2020/4/22 21:55
  * @Author:JZK
  */
@@ -38,6 +38,9 @@ public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysRoleMapper sysRoleMapper;
 
+    /*
+    * 登录功能
+    * */
     @Override
     public SysUser login(SysUserVo sysUserVo) {
 
@@ -46,6 +49,9 @@ public class SysUserServiceImpl implements SysUserService {
         return this.sysUserMapper.login(sysUserVo);
     }
 
+    /*
+    * 查询所有用户
+    * */
     @Override
     public DataGridView queryAllUser(SysUserVo sysUserVo) {
         Page<Object> page=
@@ -54,22 +60,34 @@ public class SysUserServiceImpl implements SysUserService {
         return new DataGridView(page.getTotal(),data);
     }
 
+    /*
+    * 增加用户
+    * */
     @Override
     public void addUser(SysUserVo sysUserVo) {
         this.sysUserMapper.insertSelective(sysUserVo);
     }
 
+    /*
+    * 修改用户
+    * */
     @Override
     public void updateUser(SysUserVo sysUserVo) {
         this.sysUserMapper.updateByPrimaryKeySelective(sysUserVo);
     }
 
+    /*
+    * 删除用户
+    * */
     @Override
     public void deleteUser(Integer userId) {
         this.sysUserMapper.deleteByPrimaryKey(userId);
         this.sysRoleMapper.deleteRoleUserByUid(userId);
     }
 
+    /*
+    * 批量删除
+    * */
     @Override
     public void deleteBatchUser(Integer[] ids) {
         for (Integer id:ids){
@@ -77,6 +95,9 @@ public class SysUserServiceImpl implements SysUserService {
         }
     }
 
+    /*
+    * 重置密码
+    * */
     @Override
     public void resetUserPwd(Integer userId) {
         SysUser sysUser=new SysUser();
@@ -85,6 +106,10 @@ public class SysUserServiceImpl implements SysUserService {
         this.sysUserMapper.updateByPrimaryKeySelective(sysUser);
     }
 
+    /*
+    * 返回角色树
+    * 根据当前用户是否拥有并选中
+    * */
     @Override
     public DataGridView queryUserRole(Integer userid) {
         SysRole sysRole=new SysRole();
@@ -111,6 +136,9 @@ public class SysUserServiceImpl implements SysUserService {
         return new DataGridView(data);
     }
 
+    /*
+    * 保存用户角色关系
+    * */
     @Override
     public void saveUserRole(SysUserVo sysUserVo) {
         Integer userid=sysUserVo.getUserid();

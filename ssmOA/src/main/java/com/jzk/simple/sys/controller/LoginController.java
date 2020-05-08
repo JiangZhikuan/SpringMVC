@@ -18,7 +18,7 @@ import java.util.Date;
  * ClassName:LoginController
  * Package:com.jzk.simple.sys.controller
  * Description:
- *
+ *             Controller登录功能控制器
  * @Date:2020/4/22 22:01
  * @Author:JZK
  */
@@ -33,18 +33,11 @@ public class LoginController {
     private LogInfoService logInfoService;
 
     /*
-    * 跳转登录界面
-    * */
-    @RequestMapping("toLogin")
-    public String toLogin(){
-        return "system/main/login";
-    }
-
-    /*
     * 登录方法
     * */
     @RequestMapping("login")
     public String login(SysUserVo sysUserVo, Model model){
+        //获取验证码
         String kaptchaExpected = (String)WebUtils.getHttpSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
         String kaptchaReceived = sysUserVo.getIdentity();
         if (kaptchaReceived == null || !kaptchaReceived.equalsIgnoreCase(kaptchaExpected))

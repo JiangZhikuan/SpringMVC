@@ -38,6 +38,13 @@ public class SysRoleServiceImpl implements SysRoleService {
     @Autowired
     private SysMenuMapper sysMenuMapper;
 
+    /**
+     * @param sysRoleVo
+     * @return com.jzk.simple.sys.utils.DataGridView
+     * @author:JiangZhikuan
+     * @Description: 查询所有角色
+     * @date: 2020/5/7 17:14
+     */
     @Override
     public DataGridView queryAllRole(SysRoleVo sysRoleVo) {
         Page<Object> page= PageHelper.startPage(sysRoleVo.getPage(),sysRoleVo.getLimit());
@@ -45,16 +52,37 @@ public class SysRoleServiceImpl implements SysRoleService {
         return new DataGridView(page.getTotal(),data);
     }
 
+    /**
+     * @param sysRoleVo
+     * @return void
+     * @author:JiangZhikuan
+     * @Description: 增加角色
+     * @date: 2020/5/7 17:15
+     */
     @Override
     public void addRole(SysRoleVo sysRoleVo) {
         this.sysRoleMapper.insertSelective(sysRoleVo);
     }
 
+    /**
+     * @param sysRoleVo 
+     * @return void
+     * @author:JiangZhikuan
+     * @Description: 修改角色
+     * @date: 2020/5/7 17:15
+     */
     @Override
     public void updateRole(SysRoleVo sysRoleVo) {
         this.sysRoleMapper.updateByPrimaryKeySelective(sysRoleVo);
     }
 
+    /**
+     * @param roleid
+     * @return void
+     * @author:JiangZhikuan
+     * @Description: 删除角色
+     * @date: 2020/5/7 17:15
+     */
     @Override
     public void deleteRole(Integer roleid) {
         this.sysRoleMapper.deleteByPrimaryKey(roleid);
@@ -62,6 +90,13 @@ public class SysRoleServiceImpl implements SysRoleService {
         this.sysRoleMapper.deleteRoleUserByRid(roleid);
     }
 
+    /**
+     * @param ids
+     * @return void
+     * @author:JiangZhikuan
+     * @Description: 批量删除角色
+     * @date: 2020/5/7 17:16
+     */
     @Override
     public void deleteBatchRole(Integer[] ids) {
         for (Integer id:ids){
@@ -69,6 +104,13 @@ public class SysRoleServiceImpl implements SysRoleService {
         }
     }
 
+    /**
+     * @param roleid
+     * @return com.jzk.simple.sys.utils.DataGridView
+     * @author:JiangZhikuan
+     * @Description: 根据角色id初始化菜单树
+     * @date: 2020/5/7 17:16
+     */
     @Override
     public DataGridView initRoleMenuTreeJson(Integer roleid) {
         SysMenuVo sysMenuVo=new SysMenuVo();

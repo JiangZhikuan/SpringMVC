@@ -17,7 +17,6 @@ public class AppListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         ServletContext context=servletContextEvent.getServletContext();
         context.setAttribute("ctx",context.getContextPath());
-        System.out.println("----------Servlet容器创建成功 ctx被放到servletContext作用域---------");
     }
 
     @Override
