@@ -20,4 +20,9 @@ public class BusController {
         return "business/customer/customerManager";
     }
 
+    @RequestMapping("toCarManager")
+    public String toCarManager(){
+        return "business/customer/carManager";
+    }
+
 }
