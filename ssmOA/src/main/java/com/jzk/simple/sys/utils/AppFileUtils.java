@@ -89,4 +89,34 @@ public class AppFileUtils {
         if(file.exists()){file.delete();}
     }
 
+    /*
+    * 修改图片名称
+    * */
+    public static String updateFileName(String carimg,String suffix){
+        try {
+            File file=new File(PATH,carimg);
+            if(file.exists()){
+                file.renameTo(new File(PATH,carimg.replace(suffix,"")));
+                return carimg.replace(suffix,"");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /*
+    * 删除图片
+    * */
+    public static void removeFileByPath(String carimg){
+        try{
+            File file=new File(PATH,carimg);
+            if (file.exists()){
+                file.delete();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }
