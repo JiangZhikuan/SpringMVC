@@ -46,13 +46,4 @@ public interface SysConstast {
      */
     String USER_DEFAULT_PWD = "123456";
 
-    /*
-    * 临时文件标记
-    * */
-    String FILE_UPLOAD_TEMP="_temp";
-
-    /*
-    * 默认图片地址
-    * */
-    Object DEFAULT_CAR_IMG="images/defaultcarimage.jpg";
 }
