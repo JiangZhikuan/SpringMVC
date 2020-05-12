@@ -44,7 +44,7 @@ public class AppFileUtils {
     * */
     public static ResponseEntity<Object> downloadFile(HttpServletResponse response,String path,String oldName){
         //使用绝对路径+相对路径去找对象
-        File file=new File(AppFileUtils.PATH);
+        File file=new File(AppFileUtils.PATH,path);
         //判断文件是否存在
         if(file.exists()){
             try{

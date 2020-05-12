@@ -47,7 +47,7 @@ public class FileController {
                 RandomUtils.createFileNameUseTime(
                         oldName,
                         SysConstast.FILE_UPLOAD_TEMP);
-        File dest=new File(dirName,newName);
+        File dest=new File(dirFile,newName);
         mf.transferTo(dest);
 
         Map<String,Object> map=new HashMap<>();
@@ -58,11 +58,11 @@ public class FileController {
 
     @RequestMapping("downloadShowFile")
     public ResponseEntity<Object> downloadShowFile(String path, HttpServletResponse response){
-        return AppFileUtils.downloadFile(response,path,"");
+        return AppFileUtils.downloadFile(response,path,"1");
     }
 
     @RequestMapping("downloadFile")
     public ResponseEntity<Object> downloadFile(String path,HttpServletResponse response){
-        return AppFileUtils.downloadFile(response,path,"");
+        return AppFileUtils.downloadFile(response,path,"1");
     }
 }
