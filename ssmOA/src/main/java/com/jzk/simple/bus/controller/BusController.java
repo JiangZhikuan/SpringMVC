@@ -22,7 +22,7 @@ public class BusController {
 
     @RequestMapping("toCarManager")
     public String toCarManager(){
-        return "business/customer/carManager";
+        return "business/car/carManager";
     }
 
 }
