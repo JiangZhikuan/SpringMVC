@@ -72,4 +72,28 @@ public class BusCarController {
             return ResultObj.UPDATE_ERROR;
         }
     }
+
+    @ResponseBody
+    @RequestMapping("deleteCar")
+    public ResultObj deleteCar(BusCarVo busCarVo){
+        try {
+            this.busCarService.deleteCar(busCarVo.getCarnumber());
+            return ResultObj.DELETE_SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultObj.DELETE_ERROR;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("deleteBatchCar")
+    public ResultObj deleteBatchCar(BusCarVo busCarVo){
+        try {
+            this.busCarService.deleteBatchCar(busCarVo.getIds());
+            return ResultObj.DELETE_SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultObj.DELETE_ERROR;
+        }
+    }
 }

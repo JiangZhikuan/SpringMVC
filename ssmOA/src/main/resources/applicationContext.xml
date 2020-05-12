@@ -12,5 +12,5 @@
 
     <import resource="classpath:application-dao.xml"/>
     <import resource="classpath:application-service.xml"/>
-
+    <import resource="application-task.xml"/>
 </beans>

@@ -231,7 +231,7 @@
                 if(layEvent === 'del'){ //删除
                     layer.confirm('真的删除【'+data.custname+'】这个车辆吗', function(index){
                         //向服务端发送删除指令
-                        $.post("${ctx}/car/deleteCar.action",{identity:data.identity},function(res){
+                        $.post("${ctx}/car/deleteCar.action",{carnumber:data.carnumber},function(res){
                             layer.msg(res.msg);
                             //刷新数据 表格
                             tableIns.reload();
