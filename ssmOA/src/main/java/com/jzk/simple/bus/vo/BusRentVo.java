@@ -1,7 +1,6 @@
 package com.jzk.simple.bus.vo;
 
 import com.jzk.simple.bus.domain.BusRent;
-import com.sun.xml.internal.ws.spi.db.DatabindingException;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
