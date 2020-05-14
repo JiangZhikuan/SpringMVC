@@ -1,15 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: JiangZhikuan
-  Date: 2020/5/9
-  Time: 15:24
+  Date: 2020/5/14
+  Time: 10:33
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>车辆管理</title>
+    <title>出租单管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
@@ -165,124 +165,127 @@
     </form>
 
 </div>
-    <script src="${ctx}/resources/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
-    <script src="${ctx}/resources/js/lay-config.js?v=2.0.0" charset="utf-8"></script>
-    <script type="text/javascript">
-        var tableIns;
-        layui.use([ 'jquery', 'layer', 'form', 'table','laydate'  ], function() {
-            var $ = layui.jquery;
-            var layer = layui.layer;
-            var form = layui.form;
-            var table = layui.table;
-            var laydate = layui.laydate;
-            laydate.render({
-                elem:'#startTime',
-                type:'datetime'
-            });
-            laydate.render({
-                elem:'#endTime',
-                type:'datetime'
-            });
+<!-- 添加和修改的弹出层结束 -->
 
+<script src="${ctx}/resources/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="${ctx}/resources/js/lay-config.js?v=2.0.0" charset="utf-8"></script>
+<script type="text/javascript">
+    var tableIns;
+    layui.use([ 'jquery', 'layer', 'form', 'table','laydate'  ], function() {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var form = layui.form;
+        var table = layui.table;
+        var laydate = layui.laydate;
+        laydate.render({
+            elem:'#startTime',
+            type:'datetime'
+        });
+        laydate.render({
+            elem:'#endTime',
+            type:'datetime'
+        });
+        laydate.render({
+            elem:'#begindate',
+            type:'datetime'
+        });
+        laydate.render({
+            elem:'#returndate',
+            type:'datetime'
+        });
 
-            laydate.render({
-                elem:'#begindate',
-                type:'datetime'
-            });
-            laydate.render({
-                elem:'#returndate',
-                type:'datetime'
-            });
-            //渲染数据表格
-            tableIns=table.render({
-                elem: '#rentTable'   //渲染的目标对象
-                ,url:'${ctx}/rent/loadAllRent.action' //数据接口
-                ,title: '出租单数据表'//数据导出来的标题
-                ,toolbar:"#rentToolBar"   //表格的工具条
-               // ,height:'full-220'
-                ,cellMinWidth:100 //设置列的最小默认宽度
-                ,page: true  //是否启用分页
-                ,cols: [[   //列表数据
-                    {field:'rentid', title:'出租单号',align:'center',width:'280'}
-                    ,{field:'identity', title:'身份证号',align:'center',width:'180'}
-                    ,{field:'carnumber', title:'车牌号',align:'center',width:'150'}
-                    ,{field:'rentflag', title:'出租单状态',align:'center',width:'120',templet:function(d){
-                            return d.rentflag=='1'?'<font color=blue>已归还</font>':'<font color=red>未归还</font>';
-                        }}
-                    ,{field:'begindate', title:'起租时间',align:'center',width:'180'}
-                    ,{field:'returndate', title:'还车时间',align:'center',width:'180'}
-                    ,{field:'price', title:'出租价格',align:'center',width:'120'}
-                    ,{field:'opername', title:'操作员',align:'center',width:'120'}
-                    ,{field:'createtime', title:'录入时间',align:'center',width:'180'}
-                    ,{fixed: 'right', title:'操作', toolbar: '#rentBar', width:150,align:'center'}
-                ]],
-                done:function(data,curr,count){
-                    //不是第一页时如果当前返回的的数据为0那么就返回上一页
-                    if(data.data.length==0&&curr!=1){
-                        tableIns.reload({
-                            page:{
-                                curr:curr-1
-                            }
-                        });
-                    }
+        //渲染数据表格
+        tableIns=table.render({
+            elem: '#rentTable'   //渲染的目标对象
+            ,url:'${ctx}/rent/loadAllRent.action' //数据接口
+            ,title: '出租单数据表'//数据导出来的标题
+            ,toolbar:"#rentToolBar"   //表格的工具条
+            //,height:'full-220'
+            ,cellMinWidth:100 //设置列的最小默认宽度
+            ,page: true  //是否启用分页
+            ,cols: [[   //列表数据
+                {field:'rentid', title:'出租单号',align:'center',width:'280'}
+                ,{field:'identity', title:'身份证号',align:'center',width:'180'}
+                ,{field:'carnumber', title:'车牌号',align:'center',width:'150'}
+                ,{field:'rentflag', title:'出租单状态',align:'center',width:'80',templet:function(d){
+                        return d.rentflag=='1'?'<font color=blue>已归还</font>':'<font color=red>未归还</font>';
+                    }}
+                ,{field:'begindate', title:'起租时间',align:'center',width:'180'}
+                ,{field:'returndate', title:'还车时间',align:'center',width:'180'}
+                ,{field:'price', title:'出租价格',align:'center',width:'120'}
+                ,{field:'opername', title:'操作员',align:'center',width:'120'}
+                ,{field:'createtime', title:'录入时间',align:'center',width:'180'}
+                ,{fixed: 'right', title:'操作', toolbar: '#rentBar', width:180,align:'center'}
+            ]],
+            done:function(data,curr,count){
+                //不是第一页时如果当前返回的的数据为0那么就返回上一页
+                if(data.data.length==0&&curr!=1){
+                    tableIns.reload({
+                        page:{
+                            curr:curr-1
+                        }
+                    });
+                }
+            }
+        })
+        //模糊查询
+        $("#doSearch").click(function(){
+            var params=$("#searchFrm").serialize();
+            tableIns.reload({
+                url:"${ctx}/rent/loadAllRent.action?"+params ,
+                page:{
+                    curr:1
                 }
             })
-            //模糊查询
-            $("#doSearch").click(function(){
-                var params=$("#searchFrm").serialize();
-                tableIns.reload({
-                    url:"${ctx}/rent/loadAllRent.action?"+params ,
-                    page:{
-                        curr:1
-                    }
-                })
-            });
-            //监听行工具事件
-            table.on('tool(rentTable)', function(obj){
-                var data = obj.data; //获得当前行数据
-                var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-                if(layEvent === 'del'){ //删除
-                    layer.confirm('真的删除【'+data.rentid+'】这个出租单吗', function(index){
-                        //向服务端发送删除指令
-                        $.post("${ctx}/rent/deleteRent.action",{rentid:data.rentid},function(res){
-                            layer.msg(res.msg);
-                            //刷新数据 表格
-                            tableIns.reload();
-                        })
-                    });
-                } else if(layEvent === 'edit'){ //编辑
-                    openUpdateRent(data);
+        });
+
+        //监听行工具事件
+        table.on('tool(rentTable)', function(obj){
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            if(layEvent === 'del'){ //删除
+                layer.confirm('真的删除【'+data.rentid+'】这个出租单吗', function(index){
+                    //向服务端发送删除指令
+                    $.post("${ctx}/rent/deleteRent.action",{rentid:data.rentid},function(res){
+                        layer.msg(res.msg);
+                        //刷新数据 表格
+                        tableIns.reload();
+                    })
+                });
+            } else if(layEvent === 'edit'){ //编辑
+                openUpdateRent(data);
+            }
+        });
+
+        var url;
+        var mainIndex;
+        //打开修改页面
+        function openUpdateRent(data){
+            mainIndex=layer.open({
+                type:1,
+                title:'修改出租单',
+                content:$("#saveOrUpdateDiv"),
+                area:['800px','400px'],
+                success:function(index){
+                    form.val("dataFrm",data);
+                    url="${ctx}/rent/updateRent.action";
                 }
             });
-
-            var url;
-            var mainIndex;
-            //打开修改页面
-            function openUpdateRent(data){
-                mainIndex=layer.open({
-                    type:1,
-                    title:'修改出租单',
-                    content:$("#saveOrUpdateDiv"),
-                    area:['800px','400px'],
-                    success:function(index){
-                        form.val("dataFrm",data);
-                        url="${ctx}/rent/updateRent.action";
-                    }
-                });
-            }
-            //保存
-            form.on("submit(doSubmit)",function(obj){
-                //序列化表单数据
-                var params=$("#dataFrm").serialize();
-                $.post(url,params,function(obj){
-                    layer.msg(obj.msg);
-                    //关闭弹出层
-                    layer.close(mainIndex)
-                    //刷新数据 表格
-                    tableIns.reload();
-                })
-            });
+        }
+        //保存
+        form.on("submit(doSubmit)",function(obj){
+            //序列化表单数据
+            var params=$("#dataFrm").serialize();
+            $.post(url,params,function(obj){
+                layer.msg(obj.msg);
+                //关闭弹出层
+                layer.close(mainIndex)
+                //刷新数据 表格
+                tableIns.reload();
+            })
         });
-    </script>
+    });
+
+</script>
 </body>
 </html>

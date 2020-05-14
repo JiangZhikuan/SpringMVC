@@ -71,4 +71,9 @@ public class BusCustomerServiceImpl implements BusCustomerService {
             deleteCustomer(identity);
         }
     }
+
+    @Override
+    public BusCustomer queryCustomerByIdentity(String identity) {
+        return this.busCustomerMapper.selectByPrimaryKey(identity);
+    }
 }

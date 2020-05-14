@@ -1,5 +1,6 @@
 package com.jzk.simple.bus.service;
 
+import com.jzk.simple.bus.domain.BusCustomer;
 import com.jzk.simple.bus.vo.BusCustomerVo;
 import com.jzk.simple.sys.utils.DataGridView;
 
@@ -22,5 +23,7 @@ public interface BusCustomerService {
     void deleteCustomer(String identity);
 
     void deleteBatchCustomer(String[] identitys);
+
+    BusCustomer queryCustomerByIdentity(String identity);
 
 }

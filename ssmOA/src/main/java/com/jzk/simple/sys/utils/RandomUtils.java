@@ -43,4 +43,11 @@ public class RandomUtils {
         String fileSuffix=fileName.substring(fileName.lastIndexOf("."),fileName.length());
         return UUID.randomUUID().toString().replace("_","").toUpperCase()+fileSuffix;
     }
+
+    /*
+    * 根据时间+五位随机数字符串
+    * */
+    public static String careteTandomStringUseTime(String preffx){
+        return preffx+"_"+sdf2.format(new Date())+"_"+(random.nextInt(90000)+10000);
+    }
 }
