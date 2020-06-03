@@ -45,7 +45,7 @@
         </javaClientGenerator>
         <!-- 指定数据库表 -->
         <!-- 如果要生成所有表，将tableName的属性修改为“%”即可 -->
-        <table tableName="sys_news"></table>
+        <table tableName="bus_check"></table>
         <!--<table tableName="orders"></table>
         <table tableName="orderdetail"></table>
         <table tableName="user"></table>-->

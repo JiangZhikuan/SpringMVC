@@ -23,154 +23,155 @@
     <link rel="stylesheet" href="${ctx }/resources/lib/layui_ext/dtree/font/dtreefont.css">
 </head>
 <body>
-<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>查询条件</legend>
-</fieldset>
-<form class="layui-form" method="post" id="searchFrm">
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">用户姓名:</label>
-            <div class="layui-input-inline">
-                <input type="text" name="realname"  autocomplete="off" class="layui-input">
+    <div  class="layuimini-container">
+        <fieldset class="table-search-fieldset">
+            <legend>查询条件</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane" method="post" id="searchFrm">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">用户姓名:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="realname"  autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">登陆名称:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="loginname"  autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">用户地址:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="address"  autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">用户电话:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="phone"  autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">身份证号:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="identity"  autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">性别:</label>
+                            <div class="layui-input-inline">
+                                <input type="radio" name="sex" value="1" title="男">
+                                <input type="radio" name="sex" value="0" title="女">
+                            </div>
+                        </div>
+                    </div>
+                    <div  class="layui-form-item" style="text-align: center;">
+                        <div class="layui-input-block" >
+                            <button type="button" class="layui-btn layui-btn-normal  layui-icon layui-icon-search" id="doSearch">查询</button>
+                            <button type="reset" class="layui-btn layui-btn-warm  layui-icon layui-icon-refresh">重置</button>
+                        </div>
+                    </div>
+                </form>
             </div>
+        </fieldset>
+        <div style="display: none;" id="userToolBar">
+            <button type="button" class="layui-btn layui-btn-sm" lay-event="add">增加</button>
+            <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" lay-event="deleteBatch">批量删除</button>
         </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">登陆名称:</label>
-            <div class="layui-input-inline">
-                <input type="text" name="loginname"  autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">用户地址:</label>
-            <div class="layui-input-inline">
-                <input type="text" name="address"  autocomplete="off" class="layui-input">
-            </div>
+        <table class="layui-hide" id="userTable" lay-filter="userTable"></table>
+        <div  id="userBar" style="display: none;">
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="resetUserPwd">重置密码</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+            <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="selectUserRole">分配角色</a>
         </div>
     </div>
 
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">用户电话:</label>
-            <div class="layui-input-inline">
-                <input type="text" name="phone"  autocomplete="off" class="layui-input">
+    <div style="display: none;padding: 20px" id="saveOrUpdateDiv" >
+        <form class="layui-form"  lay-filter="dataFrm" id="dataFrm">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">用户姓名:</label>
+                    <div class="layui-input-inline">
+                        <input type="hidden" name="userid">
+                        <input type="text" name="realname" lay-verify="required"   placeholder="请输入用户姓名" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">登陆名称:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="loginname" lay-verify="required"  placeholder="请输入用户登陆名称" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">身份证号:</label>
-            <div class="layui-input-inline">
-                <input type="text" name="identity"  autocomplete="off" class="layui-input">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">身份证号:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="identity"  placeholder="请输入用户身份证号" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">用户地址:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="address"  placeholder="请输入用户地址" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">性别:</label>
-            <div class="layui-input-inline">
-                <input type="radio" name="sex" value="1" title="男">
-                <input type="radio" name="sex" value="0" title="女">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">用户电话:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="phone" lay-verify="required|phone"  placeholder="请输入用户电话" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">用户职位:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="position"   placeholder="请输入用户职位" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">用户性别:</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="sex" value="1" checked="checked" title="男">
+                        <input type="radio" name="sex" value="0" title="女">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">是否可用:</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="available" value="1" checked="checked" title="可用">
+                        <input type="radio" name="available" value="0" title="不可用">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item" style="text-align: center;">
+                <div class="layui-input-block">
+                    <button type="button" class="layui-btn layui-btn-normal layui-btn-sm layui-icon layui-icon-release" lay-filter="doSubmit" lay-submit="">提交</button>
+                    <button type="reset" class="layui-btn layui-btn-warm layui-btn-sm layui-icon layui-icon-refresh" >重置</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <div  class="layui-form-item" style="text-align: center;">
-        <div class="layui-input-block" >
-            <button type="button" class="layui-btn layui-btn-normal  layui-icon layui-icon-search" id="doSearch">查询</button>
-            <button type="reset" class="layui-btn layui-btn-warm  layui-icon layui-icon-refresh">重置</button>
-        </div>
+
+    <%--分配角色--%>
+    <div style="display: none;padding: 10px" id="selectUserRole">
+        <table class="layui-hide" id="roleTable" lay-filter="roleTable"></table>
     </div>
-</form>
-
-<table class="layui-hide" id="userTable" lay-filter="userTable"></table>
-<div style="display: none;" id="userToolBar">
-    <button type="button" class="layui-btn layui-btn-sm" lay-event="add">增加</button>
-    <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" lay-event="deleteBatch">批量删除</button>
-</div>
-<div  id="userBar" style="display: none;">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="resetUserPwd">重置密码</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="selectUserRole">分配角色</a>
-</div>
-
-
-<div style="display: none;padding: 20px" id="saveOrUpdateDiv" >
-    <form class="layui-form"  lay-filter="dataFrm" id="dataFrm">
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">用户姓名:</label>
-                <div class="layui-input-inline">
-                    <input type="hidden" name="userid">
-                    <input type="text" name="realname" lay-verify="required"   placeholder="请输入用户姓名" autocomplete="off"
-                           class="layui-input">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">登陆名称:</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="loginname" lay-verify="required"  placeholder="请输入用户登陆名称" autocomplete="off"
-                           class="layui-input">
-                </div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">身份证号:</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="identity"  placeholder="请输入用户身份证号" autocomplete="off"
-                           class="layui-input">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">用户地址:</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="address"  placeholder="请输入用户地址" autocomplete="off"
-                           class="layui-input">
-                </div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">用户电话:</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="phone" lay-verify="required|phone"  placeholder="请输入用户电话" autocomplete="off"
-                           class="layui-input">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">用户职位:</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="position"   placeholder="请输入用户职位" autocomplete="off"
-                           class="layui-input">
-                </div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">用户性别:</label>
-                <div class="layui-input-inline">
-                    <input type="radio" name="sex" value="1" checked="checked" title="男">
-                    <input type="radio" name="sex" value="0" title="女">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">是否可用:</label>
-                <div class="layui-input-inline">
-                    <input type="radio" name="available" value="1" checked="checked" title="可用">
-                    <input type="radio" name="available" value="0" title="不可用">
-                </div>
-            </div>
-        </div>
-        <div class="layui-form-item" style="text-align: center;">
-            <div class="layui-input-block">
-                <button type="button" class="layui-btn layui-btn-normal layui-btn-sm layui-icon layui-icon-release" lay-filter="doSubmit" lay-submit="">提交</button>
-                <button type="reset" class="layui-btn layui-btn-warm layui-btn-sm layui-icon layui-icon-refresh" >重置</button>
-            </div>
-        </div>
-    </form>
-
-</div>
-
-<%--分配角色--%>
-<div style="display: none;padding: 10px" id="selectUserRole">
-    <table class="layui-hide" id="roleTable" lay-filter="roleTable"></table>
-</div>
 
 <script src="${ctx}/resources/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script src="${ctx}/resources/js/lay-config.js?v=2.0.0" charset="utf-8"></script>
@@ -190,19 +191,19 @@
             ,page: true  //是否启用分页
             ,cols: [[   //列表数据
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'userid', title:'ID',align:'center',width:'8%'}
-                ,{field:'realname', title:'用户姓名',align:'center',width:'8%'}
-                ,{field:'loginname', title:'登陆名',align:'center',width:'10%'}
-                ,{field:'identity', title:'身份证号',align:'center',width:'13%'}
-                ,{field:'phone', title:'用户电话',align:'center',width:'13%'}
-                ,{field:'address', title:'用户地址',align:'center',width:'10%'}
-                ,{field:'sex', title:'性别',align:'center',width:'10%',templet:function(d){
+                ,{field:'userid', title:'ID',align:'center',cellMinWidth:80}
+                ,{field:'realname', title:'用户姓名',align:'center',cellMinWidth:110}
+                ,{field:'loginname', title:'登陆名',align:'center',cellMinWidth:100}
+                ,{field:'identity', title:'身份证号',align:'center',cellMinWidth:180}
+                ,{field:'phone', title:'用户电话',align:'center',cellMinWidth:150}
+                ,{field:'address', title:'用户地址',align:'center',cellMinWidth:180}
+                ,{field:'sex', title:'性别',align:'center',cellMinWidth:80,templet:function(d){
                         return d.sex=='1'?'<font color=blue>男</font>':'<font color=red>女</font>';
                     }}
-                ,{field:'available', title:'是否可用',width:'10%',align:'center',templet:function(d){
+                ,{field:'available', title:'是否可用',cellMinWidth:80,align:'center',templet:function(d){
                         return d.available=='1'?'<font color=blue>可用</font>':'<font color=red>不可用</font>';
                     }}
-                ,{fixed: 'right', title:'操作', toolbar: '#userBar', width:260,align:'center'}
+                ,{fixed: 'right', title:'操作', toolbar: '#userBar', width:290,align:'center'}
             ]]
         });
         //模糊查询
